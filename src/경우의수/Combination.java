@@ -22,7 +22,7 @@ class Combination {
         if (r == 0) {
             ArrayList<Integer> temp = new ArrayList<Integer>();
             for (int i : comArr) {
-                temp.add(arr[i]);
+                temp.add(i);
             }
             result.add(temp);
             return;
@@ -30,7 +30,7 @@ class Combination {
 
         if (target == n) return;
 
-        comArr[index] = target;
+        comArr[index] = arr[target];
         Combination(n, r-1, comArr, index+1, target+1, arr, result);
         Combination(n, r, comArr, index, target + 1, arr, result);
     }
