@@ -4,33 +4,35 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 class Combination {
-    public static void Combination(int n, int r, int[] comArr, int index, int target, int[] arr, ArrayList<ArrayList<Integer>> result) {
-        if (r == 0) {
-            ArrayList<Integer> temp = new ArrayList<Integer>();
+    public static void combination(int n, int r, int depth, int[] comArr, int start, int[] arr, ArrayList<ArrayList<Integer>> result) {
+        if (depth == r) {
+            ArrayList<Integer> temp = new ArrayList<>();
             for (int i : comArr) {
                 temp.add(i);
             }
+//            ArrayList<Integer> temp = Arrays.stream(comArr).boxed().collect(Collectors.toCollection(ArrayList::new));
             result.add(temp);
             return;
         }
 
-        if (target == n) return;
-
-        comArr[index] = arr[target];
-        Combination(n, r-1, comArr, index+1, target+1, arr, result);
-        Combination(n, r, comArr, index, target + 1, arr, result);
+        for (int i = start; i < n; i++) {
+            comArr[depth] = arr[i];
+            combination(n, r, depth + 1, comArr, i + 1, arr, result);
+        }
     }
 
     public static void main(String[] args) {
-        int[] arr = {1,2,3,4,5,6};
-        int answer = 0;
+        int[] arr = {1,2,3,4,5};
 
         int[] comArr = new int[2];
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        Combination(arr.length, 2, comArr, 0, 0, arr, result);
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        combination(arr.length, 2, 0, comArr, 0, arr, result);
 
         for (int i = 0; i < result.size(); i++){
             System.out.println(result.get(i));
         }
+//        for (ArrayList<Integer> integers : result) {
+//            System.out.println(integers);
+//        }
     }
 }

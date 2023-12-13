@@ -4,39 +4,37 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 class Permutation {
-    public static void Permutation(int n, int r, int depth, int[] perArr, boolean[] perCheck, int[] arr, ArrayList<ArrayList<Integer>> result){
+    public static void permutation(int n, int r, int depth, int[] perArr, boolean[] perCheck, int[] arr, ArrayList<ArrayList<Integer>> result) {
         if (depth == r) {
-            ArrayList<Integer> temp = new ArrayList<Integer>();
+            ArrayList<Integer> temp = new ArrayList<>();
             for (int i = 0; i < perArr.length; i++) {
                 temp.add(perArr[i]);
             }
+//            ArrayList<Integer> temp = Arrays.stream(perArr).boxed().collect(Collectors.toCollection(ArrayList::new));
             result.add(temp);
             return;
         }
 
         for (int i = 0; i < n; i++) {
-            if(perCheck[i] == false) {
+            if (perCheck[i] == false) {
                 perArr[depth] = arr[i];
                 perCheck[i] = true;
-                Permutation(n, r, depth + 1, perArr, perCheck, arr, result);
+                permutation(n, r, depth + 1, perArr, perCheck, arr, result);
                 perCheck[i] = false;
-                perArr[depth] = 0;
             }
         }
-
     }
 
     public static void main(String[] args) {
-        int[] arr = {1,2,3,4};
-        int answer = 0;
+        int[] arr = {1, 2, 3, 4};
 
         int[] perArr = new int[arr.length];
         boolean[] perCheck = new boolean[arr.length];
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
 
-        Permutation(arr.length, arr.length, 0, perArr, perCheck, arr, result);
+        permutation(arr.length, arr.length, 0, perArr, perCheck, arr, result);
 
-        for (int i = 0; i < result.size(); i++){
+        for (int i = 0; i < result.size(); i++) {
             System.out.println(result.get(i));
         }
     }
