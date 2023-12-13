@@ -1,2 +1,5 @@
 # Project exclude paths
 /out/
+/.idea/exercise_java.iml
+/.idea/modules.xml
+/.idea/vcs.xml
