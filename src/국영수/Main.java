@@ -1,8 +1,9 @@
 package 국영수;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 class Student implements Comparable<Student> {
 
@@ -67,5 +68,59 @@ public class Main {
             System.out.println(students.get(i).getName());
       }
     }
+
+//    class Student {
+//        private String name;
+//        private int kor;
+//        private int eng;
+//        private int m;
+//
+//        public Student(String name, int kor, int eng, int m) {
+//            this.name = name;
+//            this.kor = kor;
+//            this.eng = eng;
+//            this.m = m;
+//        }
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return "Student{" +
+//                    "name='" + name + '\'' +
+//                    ", kor=" + kor +
+//                    ", eng=" + eng +
+//                    ", m=" + m +
+//                    '}';
+//        }
+//    }
+//
+//    public class Main {
+//        public static void main(String[] args) {
+//            Scanner sc = new Scanner(System.in);
+//            int n = sc.nextInt();
+//
+//            List<Student> students = new ArrayList<>();
+//            for (int i = 0; i < n; i++) {
+//                String name = sc.next();
+//                int kor = sc.nextInt();
+//                int eng = sc.nextInt();
+//                int m = sc.nextInt();
+//                students.add(new Student(name, kor, eng, m));
+//            }
+//
+//            List<Student> sortedStudents = students.stream()
+//                    .sorted(Comparator
+//                            .comparing((Student s) -> s.kor).reversed()
+//                            .thenComparing(s -> s.eng)
+//                            .thenComparing(s -> s.m, Comparator.reverseOrder())
+//                            .thenComparing(s -> s.name))
+//                    .collect(Collectors.toList());
+//
+//            sortedStudents.forEach(s -> System.out.println(s.getName()));
+//        }
+//    }
 
 }

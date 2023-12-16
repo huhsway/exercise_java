@@ -1,15 +1,16 @@
 package 경우의수;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RepeatCombination {
-    public static void repeatCombination(int n, int r, int depth, int[] comArr, int start, int[] arr, ArrayList<ArrayList<Integer>> result) {
+    public static void repeatCombination(int n, int r, int depth, int[] comArr, int start, int[] arr, List<List<Integer>> result) {
         if (depth == r) {
-            ArrayList<Integer> temp = new ArrayList<>();
+            List<Integer> temp = new ArrayList<>();
             for (int i : comArr) {
                 temp.add(i);
             }
-//            ArrayList<Integer> temp = Arrays.stream(comArr).boxed().collect(Collectors.toCollection(ArrayList::new));
+//            List<Integer> temp = Arrays.stream(comArr).boxed().collect(Collectors.toCollection(ArrayList::new));
             result.add(temp);
             return;
         }
@@ -24,14 +25,11 @@ public class RepeatCombination {
         int[] arr = {1,2,3,4,5};
 
         int[] comArr = new int[2];
-        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
         repeatCombination(arr.length, 2, 0, comArr, 0, arr, result);
 
-        for (int i = 0; i < result.size(); i++){
-            System.out.println(result.get(i));
+        for (List<Integer> integers : result) {
+            System.out.println(integers);
         }
-//        for (ArrayList<Integer> integers : result) {
-//            System.out.println(integers);
-//        }
     }
 }
