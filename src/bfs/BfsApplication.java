@@ -2,6 +2,8 @@ package bfs;
 
 import java.util.*;
 
+// https://yganalyst.github.io/training/algo_tr_ect_2/
+
 public class BfsApplication {
 
     private static class Position {
@@ -18,9 +20,9 @@ public class BfsApplication {
     private static int[] dy = {-1, 1, 0, 0};
     private static int[] dx = {0, 0, -1, 1};
 
-    public static int bfs(int y, int x) {
+    private static int bfs(int y, int x) {
         Queue<Position> queue = new LinkedList<>();
-        queue.add(new Position(y, x));
+        queue.offer(new Position(y, x));
 
         while (!queue.isEmpty()) {
             Position pos = queue.poll();
@@ -37,7 +39,7 @@ public class BfsApplication {
 
                 if (graph[ny][nx] == 1) {
                     graph[ny][nx] = graph[y][x] + 1;
-                    queue.add(new Position(ny, nx));
+                    queue.offer(new Position(ny, nx));
                 }
             }
         }

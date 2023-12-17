@@ -24,9 +24,9 @@ class Combination {
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,5};
 
-        int[] comArr = new int[2];
+        int[] comArr = new int[5];
         List<List<Integer>> result = new ArrayList<>();
-        combination(arr.length, 2, 0, comArr, 0, arr, result);
+        combination(arr.length, 4, 0, comArr, 0, arr, result);
 
         for (List<Integer> integers : result) {
             System.out.println(integers);

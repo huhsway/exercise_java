@@ -7,8 +7,8 @@ class Permutation {
     public static void permutation(int n, int r, int depth, int[] perArr, boolean[] perCheck, int[] arr, List<List<Integer>> result) {
         if (depth == r) {
             List<Integer> temp = new ArrayList<>();
-            for (int i = 0; i < perArr.length; i++) {
-                temp.add(perArr[i]);
+            for (int i : perArr) {
+                temp.add(i);
             }
 //            List<Integer> temp = Arrays.stream(perArr).boxed().collect(Collectors.toCollection(ArrayList::new));
             result.add(temp);

@@ -4,16 +4,6 @@ import java.util.*;
 
 public class Dfs {
 
-    public static void dfs(List<List<Integer>> graph, int v, boolean[] visited) {
-        visited[v] = true;
-        System.out.println(v);
-        for (int i : graph.get(v)) {
-            if (!visited[i]) {
-                dfs(graph, i, visited);
-            }
-        }
-    }
-
     public static void main(String[] args) {
         List<List<Integer>> graph = new ArrayList<>(Arrays.asList(
                 Collections.emptyList(),
@@ -27,8 +17,23 @@ public class Dfs {
                 Arrays.asList(1, 7)
         ));
 
-        boolean[] visited = new boolean[9];
-        dfs(graph, 1, visited);
+        boolean[] visited = new boolean[graph.size()];
+
+        dfs(graph, visited, 1);
+
+    }
+
+    private static void dfs(List<List<Integer>> graph, boolean[] visited, int v) {
+
+        visited[v] = true;
+        System.out.println(v);
+
+        for (int i : graph.get(v)) {
+            if (!visited[i]) {
+                dfs(graph, visited, i);
+            }
+        }
+
     }
 
 }

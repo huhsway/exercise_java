@@ -11,6 +11,7 @@ public class Bfs {
 
         while (!queue.isEmpty()) {
             int v = queue.poll();
+            System.out.println(v);
             for (int i : graph.get(v)) {
                 if (!visited[i]) {
                     queue.add(i);
@@ -35,9 +36,6 @@ public class Bfs {
 
         boolean[] visited = new boolean[9];
         bfs(graph, 1, visited);
-
-        // Optionally, print visited nodes
-        System.out.println("Visited nodes: " + Arrays.toString(visited));
     }
 
 }
