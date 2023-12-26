@@ -102,34 +102,34 @@ class Main {
         public int getMath() {
             return math;
         }
-
-
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in);
-            int n = scanner.nextInt();
-            scanner.nextLine();
-
-            List<Student> students = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
-                String line = scanner.nextLine();
-                String[] info = line.split(" ");
-                String name = info[0];
-                int kor = Integer.parseInt(info[1]);
-                int eng = Integer.parseInt(info[2]);
-                int math = Integer.parseInt(info[3]);
-                students.add(new Student(name, kor, eng, math));
-            }
-
-            students.stream()
-                    .sorted(Comparator
-                            .comparing(Student::getKor, Comparator.reverseOrder())
-                            .thenComparing(Student::getEng)
-                            .thenComparing(Student::getMath, Comparator.reverseOrder())
-                            .thenComparing(Student::getName))
-                    .forEach(s -> System.out.println(s.getName()));
-        }
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.nextLine();
+
+        List<Student> students = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            String line = scanner.nextLine();
+            String[] info = line.split(" ");
+            String name = info[0];
+            int kor = Integer.parseInt(info[1]);
+            int eng = Integer.parseInt(info[2]);
+            int math = Integer.parseInt(info[3]);
+            students.add(new Student(name, kor, eng, math));
+        }
+
+        students.stream()
+                .sorted(Comparator
+                        .comparing(Student::getKor, Comparator.reverseOrder())
+                        .thenComparing(Student::getEng)
+                        .thenComparing(Student::getMath, Comparator.reverseOrder())
+                        .thenComparing(Student::getName))
+                .forEach(s -> System.out.println(s.getName()));
+    }
 }
+
+
 
 

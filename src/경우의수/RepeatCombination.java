@@ -18,6 +18,7 @@ public class RepeatCombination {
         for (int i = start; i < n; i++) {
             comArr[depth] = arr[i];
             repeatCombination(n, r, depth + 1, comArr, i, arr, result);
+            comArr[depth] = 0;
         }
     }
 

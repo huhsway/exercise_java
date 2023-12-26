@@ -1,12 +1,14 @@
+package 괄호변환;
+
 import java.util.*;
 
 class Solution {
 
     // "균형잡힌 괄호 문자열"의 인덱스 반환
-    public int balancedIndex(String p) {
+    public int balancedIndex(String s) {
         int count = 0; // 왼쪽 괄호의 개수
-        for (int i = 0; i < p.length(); i++) {
-            if (p.charAt(i) == '(') count += 1;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') count += 1;
             else count -= 1;
             if (count == 0) return i;
         }
@@ -14,10 +16,10 @@ class Solution {
     }
 
     // "올바른 괄호 문자열"인지 판단
-    public boolean checkProper(String p) {
+    public boolean checkProper(String s) {
         int count = 0; // 왼쪽 괄호의 개수
-        for (int i = 0; i < p.length(); i++) {
-            if (p.charAt(i) == '(') count += 1;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') count += 1;
             else {
                 if (count == 0) { // 쌍이 맞지 않는 경우에 false 반환
                     return false;
@@ -28,12 +30,12 @@ class Solution {
         return true; // 쌍이 맞는 경우에 true 반환
     }
 
-    public String solution(String p) {
+    public String solution(String s) {
         String answer = "";
-        if (p.equals("")) return answer;
-        int index = balancedIndex(p);
-        String u = p.substring(0, index + 1);
-        String v = p.substring(index + 1);
+        if (s.equals("")) return answer;
+        int index = balancedIndex(s);
+        String u = s.substring(0, index + 1);
+        String v = s.substring(index + 1);
         // "올바른 괄호 문자열"이면, v에 대해 함수를 수행한 결과를 붙여 반환
         if (checkProper(u)) {
             answer = u + solution(v);

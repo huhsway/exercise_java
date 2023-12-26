@@ -10,14 +10,15 @@ class Combination {
             for (int i : comArr) {
                 temp.add(i);
             }
-//            List<Integer> temp = Arrays.stream(comArr).boxed().collect(Collectors.toCollection(ArrayList::new));
             result.add(temp);
+            //            List<Integer> temp = Arrays.stream(comArr).boxed().collect(Collectors.toCollection(ArrayList::new));
             return;
         }
 
         for (int i = start; i < n; i++) {
             comArr[depth] = arr[i];
             combination(n, r, depth + 1, comArr, i + 1, arr, result);
+            comArr[depth] = 0;
         }
     }
 
@@ -26,7 +27,7 @@ class Combination {
 
         int[] comArr = new int[5];
         List<List<Integer>> result = new ArrayList<>();
-        combination(arr.length, 4, 0, comArr, 0, arr, result);
+        combination(arr.length, 3, 0, comArr, 0, arr, result);
 
         for (List<Integer> integers : result) {
             System.out.println(integers);

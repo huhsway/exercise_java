@@ -38,4 +38,43 @@ class Permutation {
             System.out.println(integers);
         }
     }
+
+
+
+//    public static List<List<Integer>> getPermutation(int n, int m, int[] arr) {
+//        boolean[] visited = new boolean[n];
+//        List<Integer> temp = new ArrayList<>();
+//        List<List<Integer>> answer = new ArrayList<>();
+//
+//        DFS(0, n, m, arr, visited, temp, answer);
+//        return answer;
+//    }
+//
+//    private static void DFS(int depth, int n, int m, int[] arr, boolean[] visited, List<Integer> temp, List<List<Integer>> answer) {
+//        if (depth == m) {
+//            answer.add(new ArrayList<>(temp));
+//        } else {
+//            for (int i = 0; i < n; i++) {
+//                if (!visited[i]) {
+//                    visited[i] = true; // Mark as visited
+//                    temp.add(arr[i]);
+//                    DFS(depth + 1, n, m, arr, visited, temp, answer);
+//                    temp.remove(temp.size() - 1); // Remove last element when backtracking
+//                    visited[i] = false; // Reset visited status
+//                }
+//            }
+//        }
+//    }
+//
+//    public static void main(String[] args) {
+//        int n = 5; // Total number of elements in array
+//        int m = 3; // Number of elements to select
+//        int[] arr = {1, 2, 3, 4, 5}; // Example array
+//
+//        List<List<Integer>> permutations = getPermutation(n, m, arr);
+//        for (List<Integer> permutation : permutations) {
+//            System.out.println(permutation);
+//        }
+//    }
+
 }
