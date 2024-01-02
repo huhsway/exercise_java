@@ -1,23 +1,53 @@
 package dfs;
 
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 // https://yganalyst.github.io/training/algo_tr_ect_1/
 
 public class DfsApplication {
 
-    public static void main(String[] args) {
+    private static class Position {
+        int y, x;
 
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
+        Position(int y, int x) {
+            this.y = y;
+            this.x = x;
+        }
+    }
 
-        scanner.nextLine();
+    private static int n, m;
+    private static int[] dy = {-1, 1, 0, 0};
+    private static int[] dx = {0, 0, -1, 1};
+
+    private static boolean dfs(int y, int x, int[][] graph) {
+
+        if (y < 0 || y >= n || x < 0 || x >= m) {
+            return false;
+        }
+
+        if (graph[y][x] == 0) {
+            graph[y][x] = 1;
+            dfs(y - 1, x, graph);
+            dfs(y, x - 1, graph);
+            dfs(y + 1, x, graph);
+            dfs(y, x + 1, graph);
+            return true;
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
         int[][] graph = new int[n][m];
 
         for (int i = 0; i < n; i++) {
-            String line = scanner.nextLine();
+            String line = br.readLine();
             for (int j = 0; j < m; j++) {
                 graph[i][j] = line.charAt(j) - '0';
             }
@@ -33,26 +63,6 @@ public class DfsApplication {
         }
 
         System.out.println(result);
-
-    }
-
-    private static boolean dfs(int y, int x, int[][] graph) {
-
-        if (y < 0 || y >= graph.length || x < 0 || x >= graph[0].length) {
-            return false;
-        }
-
-        if (graph[y][x] == 0) {
-            graph[y][x] = 1;
-            dfs(y - 1, x, graph);
-            dfs(y, x - 1, graph);
-            dfs(y + 1, x, graph);
-            dfs(y, x + 1, graph);
-            return true;
-        }
-
-        return false;
-
     }
 
 }

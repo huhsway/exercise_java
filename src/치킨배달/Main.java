@@ -1,94 +1,83 @@
 package 치킨배달;
 
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    private static class Position {
-        private int y;
-        private int x;
+    static int n, m;
+    static int[][] city;
+    static List<int[]> house = new ArrayList<>();
+    static List<int[]> chicken = new ArrayList<>();
 
-        public Position(int y, int x) {
-            this.y = y;
-            this.x = x;
-        }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        public int getY() {
-            return this.y;
-        }
-
-        public int getX() {
-            return this.x;
-        }
-    }
-
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        sc.nextLine();
-
-        List<Position> chickens = new ArrayList<>();
-        List<Position> houses = new ArrayList<>();
-
-        int[][] arr = new int[n][n];
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        city = new int[n][n];
 
         for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
             for (int j = 0; j < n; j++) {
-                arr[i][j] = sc.nextInt();
-                if (arr[i][j] == 1) houses.add(new Position(i, j));
-                if (arr[i][j] == 2) chickens.add(new Position(i, j));
+                city[i][j] = Integer.parseInt(st.nextToken());
+                if (city[i][j] == 1) {
+                    house.add(new int[]{i, j});
+                } else if (city[i][j] == 2) {
+                    chicken.add(new int[]{i, j});
+                }
             }
         }
 
-        List<Position> comArr = new ArrayList<>();
-        List<List<Position>> candidates = new ArrayList<>();
-
-        combination(chickens.size(), m, 0, 0, chickens, comArr, candidates);
-
-        int result = (int) 1e9;
-        for (List<Position> candidate : candidates) {
-            result = Math.min(result, getSum(houses, candidate));
+        List<List<int[]>> candidates = getCombination(chicken.size(), m, chicken);
+        int answer = Integer.MAX_VALUE;
+        for (List<int[]> candidate : candidates) {
+            answer = Math.min(answer, getMinDistance(house, candidate));
         }
-        System.out.println(result);
+
+        System.out.println(answer);
     }
 
-    public static void combination(int n, int r, int depth, int start, List<Position> arr, List<Position> comArr, List<List<Position>> candidates) {
+    static int getMinDistance(List<int[]> house, List<int[]> candidate) {
+        int sum = 0;
+        for (int[] h : house) {
+            int min = Integer.MAX_VALUE;
+            for (int[] c : candidate) {
+                int distance = Math.abs(h[0] - c[0]) + Math.abs(h[1] - c[1]);
+                min = Math.min(min, distance);
+            }
+            sum += min;
+        }
+        return sum;
+    }
 
-        if (depth == r) {
-            List<Position> temp = new ArrayList<>(comArr);
-            candidates.add(temp);
+    static List<List<int[]>> getCombination(int n, int m, List<int[]> arr) {
+        List<List<int[]>> result = new ArrayList<>();
+        int[] temp = new int[m];
+
+        dfs(result, arr, temp, 0, 0, n, m);
+
+        return result;
+    }
+
+    static void dfs(List<List<int[]>> result, List<int[]> arr, int[] temp, int depth, int start, int n, int m) {
+        if (depth == m) {
+            List<int[]> combination = new ArrayList<>();
+            for (int i = 0; i < m; i++) {
+                combination.add(arr.get(temp[i]));
+            }
+            result.add(combination);
             return;
         }
 
         for (int i = start; i < n; i++) {
-            comArr.add(arr.get(i)); // comArr에 요소 추가
-            combination(n, r, depth + 1, i + 1, arr, comArr, candidates);
-            comArr.remove(comArr.size() - 1); // 이전 요소를 제거하여 다음 요소를 추가할 수 있도록 합니다.
+            temp[depth] = i;
+            dfs(result, arr, temp, depth + 1, i + 1, n, m);
         }
-
     }
-
-    public static int getSum(List<Position> houses, List<Position> candidate) {
-        int result = 0;
-        for (Position house : houses) {
-            int hy = house.getY();
-            int hx = house.getX();
-
-            int temp = (int) 1e9;
-            for (Position p : candidate) {
-                int cy = p.getY();
-                int cx = p.getX();
-                temp = Math.min(temp, Math.abs(hy - cy) + Math.abs(hx - cx));
-            }
-            result += temp;
-        }
-        return result;
-    }
-
-
 }
-
-

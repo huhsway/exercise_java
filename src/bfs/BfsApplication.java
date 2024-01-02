@@ -1,5 +1,6 @@
 package bfs;
 
+import java.io.*;
 import java.util.*;
 
 // https://yganalyst.github.io/training/algo_tr_ect_2/
@@ -47,15 +48,15 @@ public class BfsApplication {
         return graph[n - 1][m - 1];
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        n = scanner.nextInt();
-        m = scanner.nextInt();
-        scanner.nextLine();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
         graph = new int[n][m];
         for (int i = 0; i < n; i++) {
-            String line = scanner.nextLine();
+            String line = br.readLine();
             for (int j = 0; j < m; j++) {
                 graph[i][j] = line.charAt(j) - '0';
             }

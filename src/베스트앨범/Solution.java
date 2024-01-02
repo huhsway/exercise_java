@@ -10,96 +10,161 @@ import java.util.*;
  * 장르 내에서 많이 재생된 노래 순으로, 인덱스 낮은 순으로 정렬하고 최대 2개 저장
  */
 
-class Solution {
+class Song implements Comparable<Song> {
+    String genre;
+    int plays;
+    int index;
 
-    public static class Music implements Comparable<Music> {
-
-        private int cnt;
-        private int index;
-
-        public Music(int cnt, int index) {
-            this.cnt = cnt;
-            this.index = index;
-        }
-
-        public int getIndex() {
-            return this.index;
-        }
-
-        @Override
-        public int compareTo(Music music) {
-            if (this.cnt < music.cnt) {
-                return 1;
-            }
-            else if (this.cnt > music.cnt) {
-                return -1;
-            }
-            else {
-                return Integer.compare(this.index, music.index);
-            }
-        }
+    public Song(String genre, int plays, int index) {
+        this.genre = genre;
+        this.plays = plays;
+        this.index = index;
     }
 
-    public int[] solution(String[] genres, int[] plays) {
-        ArrayList<Integer> answer = new ArrayList<>();
+    @Override
+    public int compareTo(Song other) {
+        return this.plays == other.plays ? this.index - other.index : other.plays - this.plays;
+    }
+}
 
-        HashMap<String, Integer> mostGenres = new HashMap<>();
-        HashMap<String, ArrayList<Music>> playCnt = new HashMap<>();
+public class Solution {
+    public int[] solution(String[] genres, int[] plays) {
+        Map<String, Integer> genreTotalPlays = new HashMap<>();
+        Map<String, PriorityQueue<Song>> genreSongs = new HashMap<>();
 
         for (int i = 0; i < genres.length; i++) {
-            if(!mostGenres.containsKey(genres[i])) {
-                mostGenres.put(genres[i], plays[i]);
-                playCnt.put(genres[i], new ArrayList<Music>());
-            }
-            else {
-                mostGenres.put(genres[i], mostGenres.get(genres[i]) + plays[i]);
-            }
-            ArrayList<Music> tempPlayCnt = playCnt.get(genres[i]);
-            tempPlayCnt.add(new Music(plays[i], i ));
-            playCnt.put(genres[i], tempPlayCnt);
+            String genre = genres[i];
+            int play = plays[i];
+
+            genreTotalPlays.put(genre, genreTotalPlays.getOrDefault(genre, 0) + play);
+            genreSongs.computeIfAbsent(genre, k -> new PriorityQueue<>())
+                    .add(new Song(genre, play, i));
         }
 
-        List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(mostGenres.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return Integer.compare(o2.getValue(), o1.getValue());
-            }
-        });
+        List<String> genreList = new ArrayList<>(genreTotalPlays.keySet());
+        genreList.sort((a, b) -> genreTotalPlays.get(b) - genreTotalPlays.get(a));
 
-        for (Map.Entry<String, Integer> entry : entries) {
-            String tempGenres = entry.getKey();
-            ArrayList<Music> tempMusic = playCnt.get(tempGenres);
-            Collections.sort(tempMusic);
-            if (tempMusic.size() < 2) {
-                for (int i = 0; i < tempMusic.size(); i++) {
-                    answer.add(tempMusic.get(i).getIndex());
-                }
-            }
-            else {
-                for (int i = 0; i < 2; i++) {
-                    answer.add(tempMusic.get(i).getIndex());
-                }
+        List<Integer> answerList = new ArrayList<>();
+
+        for (String genre : genreList) {
+            PriorityQueue<Song> songs = genreSongs.get(genre);
+            int count = 0;
+
+            while (!songs.isEmpty() && count < 2) {
+                answerList.add(songs.poll().index);
+                count++;
             }
         }
 
-        int[] result = new int[answer.size()];
-
-        for (int i = 0; i < answer.size(); i++){
-            result[i] = answer.get(i);
-        }
-
-        return result;
+        return answerList.stream().mapToInt(Integer::intValue).toArray();
     }
 
     public static void main(String[] args) {
         String[] genres = {"classic", "pop", "classic", "classic", "pop"};
         int[] plays = {500, 600, 150, 800, 2500};
-        Solution sol = new Solution();
-        System.out.println(Arrays.toString(sol.solution(genres, plays)));
+
+        Solution solution = new Solution();
+        int[] result = solution.solution(genres, plays);
+
+        for (int i : result) {
+            System.out.print(i + " ");
+        }
     }
 
 }
+
+
+
+//class Solution {
+//
+//    public static class Music implements Comparable<Music> {
+//
+//        private int cnt;
+//        private int index;
+//
+//        public Music(int cnt, int index) {
+//            this.cnt = cnt;
+//            this.index = index;
+//        }
+//
+//        public int getIndex() {
+//            return this.index;
+//        }
+//
+//        @Override
+//        public int compareTo(Music music) {
+//            if (this.cnt < music.cnt) {
+//                return 1;
+//            }
+//            else if (this.cnt > music.cnt) {
+//                return -1;
+//            }
+//            else {
+//                return Integer.compare(this.index, music.index);
+//            }
+//        }
+//    }
+//
+//    public int[] solution(String[] genres, int[] plays) {
+//        ArrayList<Integer> answer = new ArrayList<>();
+//
+//        HashMap<String, Integer> mostGenres = new HashMap<>();
+//        HashMap<String, ArrayList<Music>> playCnt = new HashMap<>();
+//
+//        for (int i = 0; i < genres.length; i++) {
+//            if(!mostGenres.containsKey(genres[i])) {
+//                mostGenres.put(genres[i], plays[i]);
+//                playCnt.put(genres[i], new ArrayList<Music>());
+//            }
+//            else {
+//                mostGenres.put(genres[i], mostGenres.get(genres[i]) + plays[i]);
+//            }
+//            ArrayList<Music> tempPlayCnt = playCnt.get(genres[i]);
+//            tempPlayCnt.add(new Music(plays[i], i ));
+//            playCnt.put(genres[i], tempPlayCnt);
+//        }
+//
+//        List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(mostGenres.entrySet());
+//        Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>() {
+//            @Override
+//            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+//                return Integer.compare(o2.getValue(), o1.getValue());
+//            }
+//        });
+//
+//        for (Map.Entry<String, Integer> entry : entries) {
+//            String tempGenres = entry.getKey();
+//            ArrayList<Music> tempMusic = playCnt.get(tempGenres);
+//            Collections.sort(tempMusic);
+//            if (tempMusic.size() < 2) {
+//                for (int i = 0; i < tempMusic.size(); i++) {
+//                    answer.add(tempMusic.get(i).getIndex());
+//                }
+//            }
+//            else {
+//                for (int i = 0; i < 2; i++) {
+//                    answer.add(tempMusic.get(i).getIndex());
+//                }
+//            }
+//        }
+//
+//        int[] result = new int[answer.size()];
+//
+//        for (int i = 0; i < answer.size(); i++){
+//            result[i] = answer.get(i);
+//        }
+//
+//        return result;
+//    }
+//
+//    public static void main(String[] args) {
+//        String[] genres = {"classic", "pop", "classic", "classic", "pop"};
+//        int[] plays = {500, 600, 150, 800, 2500};
+//        Solution sol = new Solution();
+//        System.out.println(Arrays.toString(sol.solution(genres, plays)));
+//    }
+//
+//}
 
 //import java.util.*;
 //

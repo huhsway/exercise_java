@@ -74,60 +74,120 @@ import java.util.stream.Collectors;
 
 class Main {
 
-    private static class Student {
-        private String name;
-        private int kor;
-        private int eng;
-        private int math;
+//    private static class Student {
+//        private String name;
+//        private int kor;
+//        private int eng;
+//        private int math;
+//
+//        public Student(String name, int kor, int eng, int math) {
+//            this.name = name;
+//            this.kor = kor;
+//            this.eng = eng;
+//            this.math = math;
+//        }
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        public int getKor() {
+//            return kor;
+//        }
+//
+//        public int getEng() {
+//            return eng;
+//        }
+//
+//        public int getMath() {
+//            return math;
+//        }
+//    }
+//
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        int n = scanner.nextInt();
+//        scanner.nextLine();
+//
+//        List<Student> students = new ArrayList<>();
+//        for (int i = 0; i < n; i++) {
+//            String line = scanner.nextLine();
+//            String[] info = line.split(" ");
+//            String name = info[0];
+//            int kor = Integer.parseInt(info[1]);
+//            int eng = Integer.parseInt(info[2]);
+//            int math = Integer.parseInt(info[3]);
+//            students.add(new Student(name, kor, eng, math));
+//        }
+//
+//        students.stream()
+//                .sorted(Comparator
+//                        .comparing(Student::getKor, Comparator.reverseOrder())
+//                        .thenComparing(Student::getEng)
+//                        .thenComparing(Student::getMath, Comparator.reverseOrder())
+//                        .thenComparing(Student::getName))
+//                .forEach(s -> System.out.println(s.getName()));
+//    }
 
-        public Student(String name, int kor, int eng, int math) {
-            this.name = name;
-            this.kor = kor;
-            this.eng = eng;
-            this.math = math;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getKor() {
-            return kor;
-        }
-
-        public int getEng() {
-            return eng;
-        }
-
-        public int getMath() {
-            return math;
-        }
-    }
+//    public static void main(String[] args) {
+//        List<String> names = new ArrayList<>();
+//        List<String[]> arr = new ArrayList<>();
+//
+//        // 데이터 추가 (예시)
+//        arr.add("John 25 10 100".split(" "));
+//        arr.add("Alice 22 8 95".split(" "));
+//        arr.add("Bob 30 12 120".split(" "));
+//        arr.add("David 25 8 100".split(" "));
+//
+//        List<String[]> result = new ArrayList<>();
+//        result = arr;
+//
+//        Collections.sort(result, new Comparator<String[]>() {
+//            @Override
+//            public int compare(String[] a, String[] b) {
+//                int cmp = Integer.parseInt(b[1]) - Integer.parseInt(a[1]);
+//                if (cmp == 0) {
+//                    cmp = Integer.parseInt(a[2]) - Integer.parseInt(b[2]);
+//                    if (cmp == 0) {
+//                        cmp = Integer.parseInt(b[3]) - Integer.parseInt(a[3]);
+//                        if (cmp == 0) {
+//                            cmp = a[0].compareTo(b[0]);
+//                        }
+//                    }
+//                }
+//                return cmp;
+//            }
+//        });
+//
+//        for (String[] v : result) {
+//            names.add(v[0]);
+//        }
+//
+//        for (String name : names) {
+//            System.out.println(name);
+//        }
+//    }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        scanner.nextLine();
+        List<String> names = new ArrayList<>();
+        List<String[]> arr = new ArrayList<>();
 
-        List<Student> students = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            String line = scanner.nextLine();
-            String[] info = line.split(" ");
-            String name = info[0];
-            int kor = Integer.parseInt(info[1]);
-            int eng = Integer.parseInt(info[2]);
-            int math = Integer.parseInt(info[3]);
-            students.add(new Student(name, kor, eng, math));
-        }
+        // 데이터 추가 (예시)
+        arr.add("John 25 10 100".split(" "));
+        arr.add("Alice 22 8 95".split(" "));
+        arr.add("Bob 30 12 120".split(" "));
+        arr.add("David 25 8 100".split(" "));
 
-        students.stream()
-                .sorted(Comparator
-                        .comparing(Student::getKor, Comparator.reverseOrder())
-                        .thenComparing(Student::getEng)
-                        .thenComparing(Student::getMath, Comparator.reverseOrder())
-                        .thenComparing(Student::getName))
-                .forEach(s -> System.out.println(s.getName()));
+        arr.sort(Comparator.<String[], Integer>comparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
+                .thenComparing(a -> Integer.parseInt(a[2]), Comparator.reverseOrder())
+                .thenComparing(a -> Integer.parseInt(a[3]), Comparator.reverseOrder())
+                .thenComparing(a -> a[0]));
+
+        names = arr.stream().map(a -> a[0]).collect(Collectors.toList());
+
+        names.forEach(System.out::println);
     }
+
 }
 
 
