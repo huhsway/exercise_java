@@ -172,16 +172,21 @@ class Main {
         List<String> names = new ArrayList<>();
         List<String[]> arr = new ArrayList<>();
 
-        // 데이터 추가 (예시)
-        arr.add("John 25 10 100".split(" "));
-        arr.add("Alice 22 8 95".split(" "));
-        arr.add("Bob 30 12 120".split(" "));
-        arr.add("David 25 8 100".split(" "));
+        String[] data = {
+                "John 25 10 100",
+                "Alice 22 8 95",
+                "Bob 30 12 120",
+                "David 25 8 100"
+        };
 
-        arr.sort(Comparator.<String[], Integer>comparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
-                .thenComparing(a -> Integer.parseInt(a[2]), Comparator.reverseOrder())
-                .thenComparing(a -> Integer.parseInt(a[3]), Comparator.reverseOrder())
-                .thenComparing(a -> a[0]));
+        for (String item : data) {
+            arr.add(item.split(" "));
+        }
+
+        arr.sort(Comparator.<String[], String>comparing(a -> a[0])
+                .thenComparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
+                .thenComparing(a -> a -> a[2])
+                .thenComparing(a -> Double.parseDouble(a[3]), Comparator.reverseOrder()));
 
         names = arr.stream().map(a -> a[0]).collect(Collectors.toList());
 
