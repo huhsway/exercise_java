@@ -1,6 +1,7 @@
 package 국영수;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.io.*;
 
 // https://velog.io/@xxwb__/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4-%EC%A0%95%EB%A0%AC-%EA%B5%AD%EC%98%81%EC%88%98
@@ -192,10 +193,10 @@ class Main {
             arr.add(item.split(" "));
         }
 
-        arr.sort(Comparator.<String[], String>comparing(a -> a[0])
-                .thenComparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
-                .thenComparing(a -> a -> a[2])
-                .thenComparing(a -> Double.parseDouble(a[3]), Comparator.reverseOrder()));
+        arr.sort(Comparator.<String[], Integer>comparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
+                .thenComparing(a -> Integer.parseInt(a[2]), Comparator.reverseOrder())
+                .thenComparing(a -> Integer.parseInt(a[3]), Comparator.reverseOrder())
+                .thenComparing(a -> a[0]));
 
         names = arr.stream().map(a -> a[0]).collect(Collectors.toList());
 
