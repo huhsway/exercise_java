@@ -5,7 +5,7 @@ import java.util.*;
 class Solution {
     public int solution(int n, int[] weak, int[] dist) {
         // 길이를 2배로 늘려서 '원형'을 일자 형태로 변경
-        List<Integer> weakList = new ArrayList<Integer>();
+        List<Integer> weakList = new ArrayList<>();
         for (int i = 0; i < weak.length; i++) {
             weakList.add(weak[i]);
         }
@@ -14,13 +14,9 @@ class Solution {
         }
         // 투입할 친구 수의 최솟값을 찾아야 하므로 len(dist) + 1로 초기화
         int answer = dist.length + 1;
-        // 친구 정보를 이용해 모든 순열 계산
-        List<List<Integer>> distList = new ArrayList<>();
-        int[] perArr = new int[dist.length];
-        boolean[] perCheck = new boolean[dist.length];
-//        Arrays.fill(perCheck, false);
 
-        distList = getPermutation(dist.length, dist.length, dist);
+        // 친구 정보를 이용해 모든 순열 계산
+        List<List<Integer>> distList = getPermutation(dist.length, dist.length, dist);
 
         // 0부터 length - 1까지의 위치를 각각 시작점으로 설정
         for (int start = 0; start < weak.length; start++) {
