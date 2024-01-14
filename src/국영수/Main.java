@@ -63,7 +63,7 @@ import java.io.*;
 //        StringTokenizer st;
 //        int n = Integer.parseInt(br.readLine());
 //
-//        ArrayList<Student> students = new ArrayList<>();
+//        List<Student> students = new ArrayList<>();
 //        for (int i = 0; i < n; i++) {
 //            st = new StringTokenizer(br.readLine());
 //            String name = st.nextToken();
@@ -115,18 +115,17 @@ class Main {
 //    }
 //
 //    public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        int n = scanner.nextInt();
-//        scanner.nextLine();
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        StringTokenizer st;
+//        int n = Integer.parseInt(br.readLine());
 //
 //        List<Student> students = new ArrayList<>();
 //        for (int i = 0; i < n; i++) {
-//            String line = scanner.nextLine();
-//            String[] info = line.split(" ");
-//            String name = info[0];
-//            int kor = Integer.parseInt(info[1]);
-//            int eng = Integer.parseInt(info[2]);
-//            int math = Integer.parseInt(info[3]);
+//            st = new StringTokenizer(br.readLine());
+//            String name = st.nextToken();
+//            int kor = Integer.parseInt(st.nextToken());
+//            int eng = Integer.parseInt(st.nextToken());
+//            int math = Integer.parseInt(st.nextToken());
 //            students.add(new Student(name, kor, eng, math));
 //        }
 //
@@ -194,7 +193,7 @@ class Main {
         }
 
         arr.sort(Comparator.<String[], Integer>comparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
-                .thenComparing(a -> Integer.parseInt(a[2]), Comparator.reverseOrder())
+                .thenComparing(a -> Integer.parseInt(a[2]))
                 .thenComparing(a -> Integer.parseInt(a[3]), Comparator.reverseOrder())
                 .thenComparing(a -> a[0]));
 
