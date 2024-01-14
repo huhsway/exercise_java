@@ -36,9 +36,9 @@ class Node {
 
 class Solution {
 
-    public ArrayList<Node> getNextPos(Node pos, int[][] board) {
+    public List<Node> getNextPos(Node pos, int[][] board) {
         // 반환 결과(이동 가능한 위치들)
-        ArrayList<Node> nextPos = new ArrayList<Node>();
+        List<Node> nextPos = new ArrayList<Node>();
         // (상, 하, 좌, 우)로 이동하는 경우에 대해서 처리
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
@@ -95,7 +95,7 @@ class Solution {
         }
         // 너비 우선 탐색(BFS) 수행
         Queue<Node> q = new LinkedList<>();
-        ArrayList<Node> visited = new ArrayList<>();
+        List<Node> visited = new ArrayList<>();
         Node pos = new Node(1, 1, 1, 2, 0); // 시작 위치 설정
         q.offer(pos); // 큐에 삽입한 뒤에
         visited.add(pos); // 방문 처리
@@ -107,7 +107,7 @@ class Solution {
                 return pos.getDistance();
             }
             // 현재 위치에서 이동할 수 있는 위치 확인
-            ArrayList<Node> nextPos = getNextPos(pos, newBoard);
+            List<Node> nextPos = getNextPos(pos, newBoard);
             for (int i = 0; i < nextPos.size(); i++) {
                 // 아직 방문하지 않은 위치라면 큐에 삽입하고 방문 처리
                 boolean check = true;
