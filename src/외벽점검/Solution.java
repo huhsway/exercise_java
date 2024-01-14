@@ -1,13 +1,11 @@
 package 외벽점검;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.*;
 
 class Solution {
     public int solution(int n, int[] weak, int[] dist) {
         // 길이를 2배로 늘려서 '원형'을 일자 형태로 변경
-        ArrayList<Integer> weakList = new ArrayList<Integer>();
+        List<Integer> weakList = new ArrayList<Integer>();
         for (int i = 0; i < weak.length; i++) {
             weakList.add(weak[i]);
         }
@@ -17,11 +15,12 @@ class Solution {
         // 투입할 친구 수의 최솟값을 찾아야 하므로 len(dist) + 1로 초기화
         int answer = dist.length + 1;
         // 친구 정보를 이용해 모든 순열 계산
-        ArrayList<ArrayList<Integer>> distList = new ArrayList<ArrayList<Integer>>();
+        List<List<Integer>> distList = new ArrayList<>();
         int[] perArr = new int[dist.length];
         boolean[] perCheck = new boolean[dist.length];
 //        Arrays.fill(perCheck, false);
-        permutation(dist.length, dist.length, 0, perArr, perCheck, dist, distList);
+
+        distList = getPermutation(dist.length, dist.length, dist);
 
         // 0부터 length - 1까지의 위치를 각각 시작점으로 설정
         for (int start = 0; start < weak.length; start++) {
@@ -50,24 +49,29 @@ class Solution {
         return answer;
     }
 
-    public static void permutation(int n, int r, int depth, int[] perArr, boolean[] perCheck, int[] dist, ArrayList<ArrayList<Integer>> result) {
+    public List<List<Integer>>  getPermutation(int n, int m, int[] dist) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        boolean[] visited = new boolean[n];
 
-        if (depth == r){
-            ArrayList<Integer> temp = new ArrayList<>();
-            for (int i = 0; i < perArr.length; i++) {
-                temp.add(perArr[i]);
-            }
-            result.add(temp);
-            return;
-        }
+        dfs(n, m, dist, 0, result, temp, visited);
 
-        for (int i = 0; i < n; i++) {
-            if (perCheck[i] == false) {
-                perCheck[i] = true;
-                perArr[depth] = dist[i];
-                permutation(n, r, depth + 1, perArr, perCheck, dist, result);
-                perArr[depth] = 0;
-                perCheck[i] = false;
+        return result;
+    }
+
+    public static void dfs(int n, int m, int[] dist, int depth, List<List<Integer>> result, List<Integer> temp, boolean[] visited) {
+
+        if (depth == m){
+            result.add(new ArrayList<>(temp));
+        } else {
+            for (int i = 0; i < n; i++) {
+                if (!visited[i]) {
+                    visited[i] = true;
+                    temp.add(dist[i]);
+                    dfs(n, m, dist, depth + 1, result, temp, visited);
+                    temp.remove(temp.size() - 1);
+                    visited[i] = false;
+                }
             }
         }
 

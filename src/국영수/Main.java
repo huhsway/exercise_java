@@ -128,7 +128,28 @@ class Main {
 //            int math = Integer.parseInt(st.nextToken());
 //            students.add(new Student(name, kor, eng, math));
 //        }
-//
+
+//    /**
+//     * students.sort()와 students.stream().sorted() 둘 다 정렬을 수행하는데 사용할 수 있지만, 두 가지 접근 방식 간에는 약간의 차이가 있습니다.
+//     *
+//     * students.sort()를 사용하는 경우:
+//     *
+//     * 이 접근 방식은 주어진 List<Student>를 직접 변경하여 정렬합니다. 따라서 students 리스트가 정렬된 상태로 변경됩니다.
+//     * 정렬 후에는 students 리스트를 순회하면 정렬된 순서대로 학생들이 나올 것입니다.
+//     * 이 방식은 기존의 리스트를 수정하므로 주의해야 합니다. 원래 순서가 필요한 경우에는 사용하기 어렵습니다.
+//     * students.stream().sorted()를 사용하는 경우:
+//     *
+//     * 이 접근 방식은 주어진 List<Student>를 변경하지 않고 정렬된 새로운 Stream<Student>를 반환합니다.
+//     * 정렬 후에는 원래 students 리스트는 그대로 남아 있으며, 정렬된 학생들을 순회하려면 스트림을 사용해야 합니다.
+//     * 이 방식은 원래 리스트를 변경하지 않고 정렬된 결과를 얻을 수 있어 원본 데이터의 순서를 유지하고자 할 때 유용합니다.
+//     * 따라서 두 가지 방식 중 어떤 것을 선택할지는 필요한 작업 흐름과 원하는 동작에 따라 달라질 것입니다. 필요에 따라 두 가지 방식 중 하나를 선택하면 됩니다.
+//     * */
+
+//    students.sort(Comparator.comparing(Student::getKor, Comparator.reverseOrder())
+//            .thenComparing(Student::getEng)
+//                .thenComparing(Student::getMath, Comparator.reverseOrder())
+//            .thenComparing(Student::getName));
+
 //        students.stream()
 //                .sorted(Comparator
 //                        .comparing(Student::getKor, Comparator.reverseOrder())
