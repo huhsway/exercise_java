@@ -21,17 +21,17 @@ public class RepeatPermutation {
         List<Integer> temp = new ArrayList<>();
         List<List<Integer>> answer = new ArrayList<>();
 
-        DFS(0, n, m, arr, temp, answer);
+        dfs(n, m, arr, 0, temp, answer);
         return answer;
     }
 
-    private static void DFS(int depth, int n, int m, int[] arr, List<Integer> temp, List<List<Integer>> answer) {
+    private static void dfs(int n, int m, int[] arr, int depth, List<Integer> temp, List<List<Integer>> answer) {
         if (depth == m) {
             answer.add(new ArrayList<>(temp));
         } else {
             for (int i = 0; i < n; i++) {
                 temp.add(arr[i]);
-                DFS(depth + 1, n, m, arr, temp, answer);
+                dfs(n, m, arr, depth + 1, temp, answer);
                 temp.remove(temp.size() - 1); // backtrack
             }
         }

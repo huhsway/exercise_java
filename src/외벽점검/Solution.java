@@ -50,12 +50,12 @@ class Solution {
         List<Integer> temp = new ArrayList<>();
         boolean[] visited = new boolean[n];
 
-        dfs(n, m, dist, 0, result, temp, visited);
+        dfs(n, m, dist, 0, visited, temp, result);
 
         return result;
     }
 
-    public static void dfs(int n, int m, int[] dist, int depth, List<List<Integer>> result, List<Integer> temp, boolean[] visited) {
+    public static void dfs(int n, int m, int[] dist, int depth, boolean[] visited, List<Integer> temp, List<List<Integer>> result) {
 
         if (depth == m){
             result.add(new ArrayList<>(temp));
@@ -64,7 +64,7 @@ class Solution {
                 if (!visited[i]) {
                     visited[i] = true;
                     temp.add(dist[i]);
-                    dfs(n, m, dist, depth + 1, result, temp, visited);
+                    dfs(n, m, dist, depth + 1, visited, temp, result);
                     temp.remove(temp.size() - 1);
                     visited[i] = false;
                 }

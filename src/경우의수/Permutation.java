@@ -21,11 +21,11 @@ class Permutation {
         List<Integer> temp = new ArrayList<>();
         List<List<Integer>> answer = new ArrayList<>();
 
-        DFS(0, n, m, arr, visited, temp, answer);
+        dfs(n, m, arr, 0, visited, temp, answer);
         return answer;
     }
 
-    private static void DFS(int depth, int n, int m, int[] arr, boolean[] visited, List<Integer> temp, List<List<Integer>> answer) {
+    private static void dfs(int n, int m, int[] arr, int depth, boolean[] visited, List<Integer> temp, List<List<Integer>> answer) {
         if (depth == m) {
             answer.add(new ArrayList<>(temp));
         } else {
@@ -33,7 +33,7 @@ class Permutation {
                 if (!visited[i]) {
                     visited[i] = true; // mark as visited
                     temp.add(arr[i]);
-                    DFS(depth + 1, n, m, arr, visited, temp, answer);
+                    dfs(n, m, arr, depth + 1,  visited, temp, answer);
                     temp.remove(temp.size() - 1); // backtrack
                     visited[i] = false; // reset the visited status
                 }

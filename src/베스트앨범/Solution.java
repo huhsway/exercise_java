@@ -63,6 +63,7 @@ public class Solution {
         String[] genres = {"classic", "pop", "classic", "classic", "pop"};
         int[] plays = {500, 600, 150, 800, 2500};
 
+
         Solution solution = new Solution();
         int[] result = solution.solution(genres, plays);
 

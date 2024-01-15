@@ -1,5 +1,8 @@
 package 이진탐색범위찾기;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
@@ -30,17 +33,20 @@ public class Main {
         return rightIndex - leftIndex;
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
         // 데이터의 개수 N, 찾고자 하는 값 x 입력받기
-        int n = sc.nextInt();
-        int x = sc.nextInt();
+        int n = Integer.parseInt(st.nextToken());
+        int x = Integer.parseInt(st.nextToken());
 
         // 전체 데이터 입력받기
         int[] arr = new int[n];
+
+        st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
         // 값이 [x, x] 범위에 있는 데이터의 개수 계산

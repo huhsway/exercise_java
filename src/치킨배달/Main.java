@@ -7,12 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+class Node {
+    int y;
+    int x;
+
+    public Node(int y, int x) {
+        this.y = y;
+        this.x = x;
+    }
+}
+
 public class Main {
 
     static int n, m;
     static int[][] city;
-    static List<int[]> house = new ArrayList<>();
-    static List<int[]> chicken = new ArrayList<>();
+    static List<Node> house = new ArrayList<>();
+    static List<Node> chicken = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,28 +37,28 @@ public class Main {
             for (int j = 0; j < n; j++) {
                 city[i][j] = Integer.parseInt(st.nextToken());
                 if (city[i][j] == 1) {
-                    house.add(new int[]{i, j});
+                    house.add(new Node(i, j));
                 } else if (city[i][j] == 2) {
-                    chicken.add(new int[]{i, j});
+                    chicken.add(new Node(i, j));
                 }
             }
         }
 
-        List<List<int[]>> candidates = getCombination(chicken.size(), m, chicken);
+        List<List<Node>> candidates = getCombination(chicken.size(), m, chicken);
         int answer = Integer.MAX_VALUE;
-        for (List<int[]> candidate : candidates) {
+        for (List<Node> candidate : candidates) {
             answer = Math.min(answer, getMinDistance(house, candidate));
         }
 
         System.out.println(answer);
     }
 
-    static int getMinDistance(List<int[]> house, List<int[]> candidate) {
+    static int getMinDistance(List<Node> house, List<Node> candidate) {
         int sum = 0;
-        for (int[] h : house) {
+        for (Node h : house) {
             int min = Integer.MAX_VALUE;
-            for (int[] c : candidate) {
-                int distance = Math.abs(h[0] - c[0]) + Math.abs(h[1] - c[1]);
+            for (Node c : candidate) {
+                int distance = Math.abs(h.x - c.x) + Math.abs(h.y - c.y);
                 min = Math.min(min, distance);
             }
             sum += min;
@@ -56,28 +66,25 @@ public class Main {
         return sum;
     }
 
-    static List<List<int[]>> getCombination(int n, int m, List<int[]> arr) {
-        List<List<int[]>> result = new ArrayList<>();
-        int[] temp = new int[m];
+    static List<List<Node>> getCombination(int n, int m, List<Node> arr) {
+        List<List<Node>> result = new ArrayList<>();
+        List<Node> temp = new ArrayList<>();
 
-        dfs(result, arr, temp, 0, 0, n, m);
+        dfs(n, m, arr, 0, 0, temp, result);
 
         return result;
     }
 
-    static void dfs(List<List<int[]>> result, List<int[]> arr, int[] temp, int depth, int start, int n, int m) {
+    static void dfs(int n, int m, List<Node> arr, int depth, int start, List<Node> temp, List<List<Node>> result) {
         if (depth == m) {
-            List<int[]> combination = new ArrayList<>();
-            for (int i = 0; i < m; i++) {
-                combination.add(arr.get(temp[i]));
+            result.add(new ArrayList<>(temp));
+        } else {
+            for (int i = start; i < n; i++) {
+                temp.add(arr.get(i));
+                dfs(n, m, arr, depth + 1, i + 1, temp, result);
+                temp.remove(temp.size() - 1); // backtrack
             }
-            result.add(combination);
-            return;
-        }
-
-        for (int i = start; i < n; i++) {
-            temp[depth] = i;
-            dfs(result, arr, temp, depth + 1, i + 1, n, m);
         }
     }
 }
+

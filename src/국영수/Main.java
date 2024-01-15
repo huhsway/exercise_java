@@ -159,45 +159,6 @@ class Main {
 //                .forEach(s -> System.out.println(s.getName()));
 //    }
 
-//    public static void main(String[] args) {
-//        List<String> names = new ArrayList<>();
-//        List<String[]> arr = new ArrayList<>();
-//
-//        // 데이터 추가 (예시)
-//        arr.add("John 25 10 100".split(" "));
-//        arr.add("Alice 22 8 95".split(" "));
-//        arr.add("Bob 30 12 120".split(" "));
-//        arr.add("David 25 8 100".split(" "));
-//
-//        List<String[]> result = new ArrayList<>();
-//        result = arr;
-//
-//        Collections.sort(result, new Comparator<String[]>() {
-//            @Override
-//            public int compare(String[] a, String[] b) {
-//                int cmp = Integer.parseInt(b[1]) - Integer.parseInt(a[1]);
-//                if (cmp == 0) {
-//                    cmp = Integer.parseInt(a[2]) - Integer.parseInt(b[2]);
-//                    if (cmp == 0) {
-//                        cmp = Integer.parseInt(b[3]) - Integer.parseInt(a[3]);
-//                        if (cmp == 0) {
-//                            cmp = a[0].compareTo(b[0]);
-//                        }
-//                    }
-//                }
-//                return cmp;
-//            }
-//        });
-//
-//        for (String[] v : result) {
-//            names.add(v[0]);
-//        }
-//
-//        for (String name : names) {
-//            System.out.println(name);
-//        }
-//    }
-
     public static void main(String[] args) {
         List<String> names = new ArrayList<>();
         List<String[]> arr = new ArrayList<>();

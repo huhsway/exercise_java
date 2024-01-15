@@ -1,5 +1,8 @@
 package 이진탐색값찾기;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
@@ -18,17 +21,19 @@ public class Main {
         return -1;
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
         // 원소의 개수(n)와 찾고자 하는 값(target)을 입력받기
-        int n = sc.nextInt();
-        int target = sc.nextInt();
+        int n = Integer.parseInt(st.nextToken());
+        int target = Integer.parseInt(st.nextToken());
 
         // 전체 원소 입력받기
         int[] arr = new int[n];
+        st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
         // 이진 탐색 수행 결과 출력
