@@ -129,9 +129,7 @@ class PriorityQueue<T extends Comparable<T>> {
         heap.set(i, heap.get(j));
         heap.set(j, temp);
     }
-}
 
-public class Main {
     public static void main(String[] args) {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
         priorityQueue.push(3);
