@@ -76,8 +76,16 @@ public class MyHashTable<K, V> {
         return size;
     }
 
+    private int customHashCode(K key) {
+        int hash = 0;
+        for (char c : key.toString().toCharArray()) {
+            hash += (int) c;
+        }
+        return hash;
+    }
+
     private int hash(K key) {
-        return Math.abs(key.hashCode() % capacity);
+        return Math.abs(customHashCode(key) % capacity);
     }
 
     private void resize() {
