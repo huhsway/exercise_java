@@ -1,6 +1,8 @@
 package 자료구조.해시테이블;
 
+import java.util.*;
 public class MyHashTable<K, V> {
+
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] keys;
     private Object[] values;
@@ -8,14 +10,23 @@ public class MyHashTable<K, V> {
     private int size;
 
     public MyHashTable() {
-        this.capacity = DEFAULT_CAPACITY;
-        this.keys = new Object[capacity];
-        this.values = new Object[capacity];
-        this.size = 0;
+        capacity = DEFAULT_CAPACITY;
+        keys = new Object[capacity];
+        values = new Object[capacity];
+        size = 0;
+    }
+
+    private int getHash(K key) {
+        int hash = 0;
+        char[] arr = key.toString().toCharArray();
+        for (char c : arr) {
+            hash += (int) c;
+        }
+        return hash % capacity;
     }
 
     public void put(K key, V value) {
-        int index = hash(key);
+        int index = getHash(key);
         while (keys[index] != null) {
             if (keys[index].equals(key)) {
                 values[index] = value;
@@ -28,54 +39,46 @@ public class MyHashTable<K, V> {
         values[index] = value;
         size++;
 
-        /**
-         * 로드 팩터 (load factor)를 확인하여 해시 테이블의 크기가 일정 수준을 초과하면 (size와 capacity의 비율이 0.7을 초과하면) 배열의 크기를 조절하기 위해 resize 메서드를 호출합니다. 해시 테이블의 크기가 커질 때 충돌 가능성을 줄이기 위해 배열을 확장하고 모든 기존 항목을 새 배열로 이동시킵니다.
-         */
-
         if ((double) size / capacity > 0.7) {
             resize();
         }
     }
 
-    public V get(K key) {
-        int index = findKeyIndex(key);
-        if (index != -1) {
-            return (V) values[index];
-        }
-        return null;
+    private void resize() {
+        int newCapacity = capacity * 2;
+        Object[] newKeys = Arrays.copyOf(keys, newCapacity);
+        Object[] newValues = Arrays.copyOf(values, newCapacity);
+
+        keys = newKeys;
+        values = newValues;
+        capacity = newCapacity;
     }
 
-    public void remove(K key) {
-        int index = findKeyIndex(key);
-        if (index != -1) {
-            keys[index] = null;
-            values[index] = null;
-            size--;
-        }
-    }
+//    private void resize() {
+//        int newCapacity = capacity * 2;
+//        Object[] newKeys = new Object[newCapacity];
+//        Object[] newValues = new Object[newCapacity];
+//
+//        for (int i = 0; i < capacity; i++) {
+//            if (keys[i] != null) {
+//                K currentKey = (K) keys[i];
+//                V currentValue = (V) values[i];
+//                int index = getHash(currentKey);
+//                while (newKeys[index] != null) {
+//                    index = (index + 1) % newCapacity;
+//                }
+//                newKeys[index] = currentKey;
+//                newValues[index] = currentValue;
+//            }
+//        }
+//
+//        keys = newKeys;
+//        values = newValues;
+//        capacity = newCapacity;
+//    }
 
-    public boolean containsKey(K key) {
-        return findKeyIndex(key) != -1;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    private int customHashCode(K key) {
-        int hash = 0;
-        for (char c : key.toString().toCharArray()) {
-            hash += (int) c;
-        }
-        return hash;
-    }
-
-    private int hash(K key) {
-        return Math.abs(customHashCode(key) % capacity);
-    }
-
-    private int findKeyIndex(K key) {
-        int index = hash(key);
+    private int findByIndex(K key) {
+        int index = getHash(key);
         while (keys[index] != null) {
             if (keys[index].equals(key)) {
                 return index;
@@ -85,27 +88,29 @@ public class MyHashTable<K, V> {
         return -1;
     }
 
-    private void resize() {
-        int newCapacity = capacity * 2;
-        Object[] newKeys = new Object[newCapacity];
-        Object[] newValues = new Object[newCapacity];
-
-        for (int i = 0; i < capacity; i++) {
-            if (keys[i] != null) {
-                K key = (K) keys[i];
-                V value = (V) values[i];
-                int index = hash(key);
-                while (newKeys[index] != null) {
-                    index = (index + 1) % newCapacity;
-                }
-                newKeys[index] = key;
-                newValues[index] = value;
-            }
+    public V get(K key) {
+        int index = findByIndex(key);
+        if (index != -1) {
+            return (V) values[index];
         }
+        return null;
+    }
 
-        keys = newKeys;
-        values = newValues;
-        capacity = newCapacity;
+    public void remove(K key) {
+        int index = findByIndex(key);
+        if (index != -1) {
+            keys[index] = null;
+            values[index] = null;
+            size--;
+        }
+    }
+
+    public boolean containsKey(K key) {
+        return findByIndex(key) != -1;
+    }
+
+    public int size() {
+        return size;
     }
 
     public static void main(String[] args) {
@@ -122,5 +127,5 @@ public class MyHashTable<K, V> {
         System.out.println("Size (after removing 'one'): " + myHashTable.size()); // 2
         System.out.println("Contains key 'one'? " + myHashTable.containsKey("one")); // false
     }
-}
 
+}
