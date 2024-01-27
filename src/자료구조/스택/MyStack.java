@@ -15,7 +15,7 @@ public class MyStack<T> {
     public void push(T item) {
         if (size == elements.length) {
             // 스택이 가득 차면 배열 크기를 늘린다.
-            resize();
+            elements = Arrays.copyOf(elements, size * 2);
         }
         elements[size++] = item;
     }
@@ -43,11 +43,6 @@ public class MyStack<T> {
 
     public boolean isEmpty() {
         return size == 0;
-    }
-
-    private void resize() {
-        int newCapacity = elements.length * 2;
-        elements = Arrays.copyOf(elements, newCapacity);
     }
 
     public static void main(String[] args) {

@@ -6,12 +6,10 @@ public class MyQueue<T> {
     private int size;
     private int front; // 큐의 맨 앞 인덱스
     private int rear;  // 큐의 맨 뒤 인덱스
+    private int capacity; // 배열의 용량
 
     public MyQueue() {
-        this(DEFAULT_CAPACITY);
-    }
-
-    public MyQueue(int capacity) {
+        capacity = DEFAULT_CAPACITY;
         elements = new Object[capacity];
         size = 0;
         front = 0;
@@ -22,19 +20,18 @@ public class MyQueue<T> {
         if (isFull()) {
             resize();
         }
-        rear = (rear + 1) % elements.length;
+        rear = (rear + 1) % capacity;
         elements[rear] = item;
         size++;
     }
 
-    @SuppressWarnings("unchecked")
     public T dequeue() {
         if (isEmpty()) {
             throw new IllegalStateException("큐가 비어 있습니다.");
         }
         T item = (T) elements[front];
         elements[front] = null; // 메모리 누수 방지
-        front = (front + 1) % elements.length;
+        front = (front + 1) % capacity;
         size--;
         return item;
     }
@@ -55,12 +52,12 @@ public class MyQueue<T> {
     }
 
     public boolean isFull() {
-        return size == elements.length;
+        return size == capacity;
     }
 
     private void resize() {
-        int newCapacity = elements.length * 2;
-        Object[] newElements = new Object[newCapacity];
+        capacity *= 2; // 용량을 2배로 증가
+        Object[] newElements = new Object[capacity];
         for (int i = 0; i < size; i++) {
             newElements[i] = elements[(front + i) % elements.length];
         }
@@ -84,5 +81,3 @@ public class MyQueue<T> {
         System.out.println("큐 크기 (디큐 후): " + myQueue.size()); // 2
     }
 }
-
-

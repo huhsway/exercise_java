@@ -46,36 +46,26 @@ public class MyHashTable<K, V> {
 
     private void resize() {
         int newCapacity = capacity * 2;
-        Object[] newKeys = Arrays.copyOf(keys, newCapacity);
-        Object[] newValues = Arrays.copyOf(values, newCapacity);
+        Object[] newKeys = new Object[newCapacity];
+        Object[] newValues = new Object[newCapacity];
+
+        for (int i = 0; i < capacity; i++) {
+            if (keys[i] != null) {
+                K currentKey = (K) keys[i];
+                V currentValue = (V) values[i];
+                int index = getHash(currentKey);
+                while (newKeys[index] != null) {
+                    index = (index + 1) % newCapacity;
+                }
+                newKeys[index] = currentKey;
+                newValues[index] = currentValue;
+            }
+        }
 
         keys = newKeys;
         values = newValues;
         capacity = newCapacity;
     }
-
-//    private void resize() {
-//        int newCapacity = capacity * 2;
-//        Object[] newKeys = new Object[newCapacity];
-//        Object[] newValues = new Object[newCapacity];
-//
-//        for (int i = 0; i < capacity; i++) {
-//            if (keys[i] != null) {
-//                K currentKey = (K) keys[i];
-//                V currentValue = (V) values[i];
-//                int index = getHash(currentKey);
-//                while (newKeys[index] != null) {
-//                    index = (index + 1) % newCapacity;
-//                }
-//                newKeys[index] = currentKey;
-//                newValues[index] = currentValue;
-//            }
-//        }
-//
-//        keys = newKeys;
-//        values = newValues;
-//        capacity = newCapacity;
-//    }
 
     private int findByIndex(K key) {
         int index = getHash(key);
