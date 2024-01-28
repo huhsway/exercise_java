@@ -5,15 +5,18 @@ public class ProductOfArrayExceptSelf {
         int length = nums.length;
         int[] result = new int[length];
 
-        result[0] = 1;
-        for (int i = 1; i < length; i++) {
-            result[i] = result[i - 1] * nums[i - 1];
+        // 먼저 왼쪽 곱셈 결과를 계산하고 저장합니다.
+        int left = 1;
+        for (int i = 0; i < length; i++) {
+            result[i] = left;
+            left *= nums[i];
         }
 
-        int acc = 1;
-        for (int i = length - 2; i >= 0; i--) {
-            acc *= nums[i + 1];
-            result[i] *= acc;
+        // 이제 오른쪽 곱셈 결과를 계산하고 왼쪽 곱셈 결과와 곱합니다.
+        int right = 1;
+        for (int i = length - 1; i >= 0; i--) {
+            result[i] *= right;
+            right *= nums[i];
         }
 
         return result;
