@@ -6,19 +6,7 @@ import java.util.*;
 // https://yganalyst.github.io/training/algo_tr_ect_1/
 
 public class DfsApplication {
-
-    private static class Position {
-        int y, x;
-
-        Position(int y, int x) {
-            this.y = y;
-            this.x = x;
-        }
-    }
-
     private static int n, m;
-    private static int[] dy = {-1, 1, 0, 0};
-    private static int[] dx = {0, 0, -1, 1};
 
     private static boolean dfs(int y, int x, int[][] graph) {
 

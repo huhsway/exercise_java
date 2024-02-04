@@ -2,32 +2,33 @@ package LeetCode.Matrix;
 
 public class WordSearch {
     public boolean exist(char[][] board, String word) {
-        char[] wordChars = word.toCharArray();
-        int wordLen = wordChars.length;
-        int[] dx = {0, 1, 0, -1};
-        int[] dy = {1, 0, -1, 0};
 
-        return DFS(0, 0, 0, board, wordChars, wordLen, dx, dy);
-    }
-
-    private boolean DFS(int L, int x, int y, char[][] board, char[] wordChars, int wordLen, int[] dx, int[] dy) {
-        if (L == wordLen) {
-            return true;
-        } else {
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-                if (nx >= 0 && ny >= 0 && nx < board[0].length && ny < board.length) {
-                    if (board[ny][nx] == wordChars[L]) {
-                        char temp = board[ny][nx];
-                        board[ny][nx] = '\0';
-
-                        if (DFS(L + 1, nx, ny, board, wordChars, wordLen, dx, dy)) return true;
-                        board[ny][nx] = temp;
-                    }
-                }
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[0].length; x++) {
+                if (search(y, x, board, word, 0))
+                    return true;
             }
         }
+
         return false;
+
+    }
+
+    public boolean search(int y, int x, char[][] board, String word, int depth) {
+        if (depth == word.length()) return true;
+
+        if (y < 0 || x < 0 || y >= board.length || x >= board[0].length) return false;
+        if (board[y][x] != word.charAt(depth)) return false;
+
+        char temp = board[y][x]; // 현재 위치의 문자를 임시로 저장
+        board[y][x] = '\0'; // 현재 위치를 방문 표시
+
+        boolean found = search(y + 1, x, board, word, depth + 1)
+                || search(y - 1, x, board, word, depth + 1)
+                || search(y, x + 1, board, word, depth + 1)
+                || search(y, x - 1, board, word, depth + 1);
+
+        board[y][x] = temp; // 임시로 저장한 문자로 원래 상태로 복원
+        return found;
     }
 }
