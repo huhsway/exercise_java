@@ -13,26 +13,26 @@ public class LongestPalindromeSubstring {
             return s;
         int maxLength = 1;
         int start = 0;
-        int low, high;
+        int left, right;
         for (int i = 0; i < n; i++) {
-            low = i - 1;
-            high = i + 1;
+            left = i - 1;
+            right = i + 1;
 
-            while (high < n && s.charAt(high) == s.charAt(i)) // increment 'high'
-                high++;
+            while (right < n && s.charAt(right) == s.charAt(i)) // increment 'right'
+                right++;
 
-            while (low >= 0 && s.charAt(low) == s.charAt(i)) // decrement 'low'
-                low--;
+            while (left >= 0 && s.charAt(left) == s.charAt(i)) // decrement 'left'
+                left--;
 
-            while (low >= 0 && high < n && s.charAt(low) == s.charAt(high)) {
-                low--;
-                high++;
+            while (left >= 0 && right < n && s.charAt(left) == s.charAt(right)) {
+                left--;
+                right++;
             }
 
-            int length = high - low - 1;
+            int length = right - left - 1;
             if (maxLength < length) {
                 maxLength = length;
-                start = low + 1;
+                start = left + 1;
             }
         }
 

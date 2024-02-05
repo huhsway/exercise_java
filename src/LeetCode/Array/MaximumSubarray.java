@@ -2,12 +2,12 @@ package LeetCode.Array;
 
 public class MaximumSubarray {
     public int maxSubArray(int[] nums) {
-        int temp = nums[0];
+        int maxValue = nums[0];
         int result = nums[0];
 
         for (int i = 1; i < nums.length; i++) {
-            temp = Math.max(temp + nums[i], nums[i]);
-            result = Math.max(temp, result);
+            maxValue = Math.max(maxValue + nums[i], nums[i]);
+            result = Math.max(maxValue, result);
         }
 
         return result;

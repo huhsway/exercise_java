@@ -10,20 +10,16 @@ public class DfsApplication {
 
     private static boolean dfs(int y, int x, int[][] graph) {
 
-        if (y < 0 || y >= n || x < 0 || x >= m) {
+        if (y < 0 || y >= n || x < 0 || x >= m || graph[y][x] == 1) {
             return false;
         }
 
-        if (graph[y][x] == 0) {
-            graph[y][x] = 1;
-            dfs(y - 1, x, graph);
-            dfs(y, x - 1, graph);
-            dfs(y + 1, x, graph);
-            dfs(y, x + 1, graph);
-            return true;
-        }
-
-        return false;
+        graph[y][x] = 1;
+        dfs(y - 1, x, graph);
+        dfs(y, x - 1, graph);
+        dfs(y + 1, x, graph);
+        dfs(y, x + 1, graph);
+        return true;
     }
 
     public static void main(String[] args) throws IOException {
@@ -52,5 +48,4 @@ public class DfsApplication {
 
         System.out.println(result);
     }
-
 }
