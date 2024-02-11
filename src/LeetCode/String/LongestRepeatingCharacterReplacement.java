@@ -8,7 +8,7 @@ public class LongestRepeatingCharacterReplacement {
         int maxCharCount = 0;
         Map<Character, Integer> visited = new HashMap<>();
 
-        while (right < s.length()) {
+        while (right < s.length()) { // 초깃값 left, right = 0
             char charAtRight = s.charAt(right);
             visited.put(charAtRight, visited.getOrDefault(charAtRight, 0) + 1);
             maxCharCount = Math.max(maxCharCount, visited.get(charAtRight));

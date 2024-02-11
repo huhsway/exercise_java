@@ -21,6 +21,25 @@ public class Main {
         return -1;
     }
 
+//    // 재귀적 이진 탐색 메소드
+//    public static int binarySearch(int[] arr, int target, int low, int high) {
+//        if (low > high) {
+//            return -1; // 요소를 찾지 못한 경우
+//        }
+//
+//        int mid = low + (high - low) / 2;
+//
+//        if (arr[mid] == target) {
+//            return mid; // 요소를 찾은 경우
+//        } else if (arr[mid] > target) {
+//            // 중간 값이 찾는 값보다 큰 경우, 왼쪽 부분 배열에서 다시 탐색
+//            return binarySearch(arr, target, low, mid - 1);
+//        } else {
+//            // 중간 값이 찾는 값보다 작은 경우, 오른쪽 부분 배열에서 다시 탐색
+//            return binarySearch(arr, target, mid + 1, high);
+//        }
+//    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());

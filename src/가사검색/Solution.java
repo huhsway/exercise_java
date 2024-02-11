@@ -4,7 +4,7 @@ import java.util.*;
 
 class Solution {
 
-    public int lowerBound(ArrayList<String> arr, String target, int start, int end) {
+    public int lowerBound(List<String> arr, String target, int start, int end) {
         while (start < end) {
             int mid = (start + end) / 2;
             if (arr.get(mid).compareTo(target) >= 0) end = mid;
@@ -13,7 +13,7 @@ class Solution {
         return end;
     }
 
-    public int upperBound(ArrayList<String> arr, String target, int start, int end) {
+    public int upperBound(List<String> arr, String target, int start, int end) {
         while (start < end) {
             int mid = (start + end) / 2;
             if (arr.get(mid).compareTo(target) > 0) end = mid;
@@ -22,17 +22,16 @@ class Solution {
         return end;
     }
 
-    public int countByRange(ArrayList<String> arr, String leftValue, String rightValue) {
+    public int countByRange(List<String> arr, String leftValue, String rightValue) {
         int rightIndex = upperBound(arr, rightValue, 0, arr.size());
         int leftIndex = lowerBound(arr, leftValue, 0, arr.size());
         return rightIndex - leftIndex;
     }
 
     public int[] solution(String[] words, String[] queries) {
-        ArrayList<Integer> ans = new ArrayList<>();
-
-        ArrayList<ArrayList<String>> arr = new ArrayList<>(10001);
-        ArrayList<ArrayList<String>> reversedArr = new ArrayList<>(10001);
+        List<Integer> ans = new ArrayList<>();
+        List<List<String>> arr = new ArrayList<>(10001);
+        List<List<String>> reversedArr = new ArrayList<>(10001);
 
         for (int i = 0; i <= 10000; i++) {
             arr.add(new ArrayList<>());
