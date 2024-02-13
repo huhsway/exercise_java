@@ -19,8 +19,8 @@ public class ContainsDuplicate {
 //
 //        return false;
 
-        // anyMatch는 boolean형을 반환 만약 count 가 1이 아닌게 하나라도 있으면 true 반환 그렇지 않으면 false 반환
-        return countMap.values().stream().anyMatch(count -> count != 1);
+        // anyMatch는 boolean형을 반환 만약 count 가 1보다 큰게 하나라도 있으면 true 반환 그렇지 않으면 false 반환
+        return countMap.values().stream().anyMatch(count -> count > 1);
 
     }
 
