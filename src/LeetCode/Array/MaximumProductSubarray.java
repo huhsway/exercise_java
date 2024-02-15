@@ -2,16 +2,16 @@ package LeetCode.Array;
 
 public class MaximumProductSubarray {
     public int maxProduct(int[] nums) {
-        int result = nums[0];
+        int result = Integer.MIN_VALUE;
         int maxValue = 1;
         int minValue = 1;
         int temp;
 
         for (int num : nums) {
             temp = maxValue;
-            maxValue = Math.max(Math.max(temp * num, minValue * num), num);
+            maxValue = Math.max(Math.max(maxValue * num, minValue * num), num);
             minValue = Math.min(Math.min(temp * num, minValue * num), num);
-            result = Math.max(maxValue, result);
+            result = Math.max(result, maxValue);
         }
 
         return result;
