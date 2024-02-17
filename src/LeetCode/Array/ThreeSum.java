@@ -7,13 +7,13 @@ import java.util.List;
 public class ThreeSum {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> answer = new ArrayList<>();
-        int N = nums.length;
+        int n = nums.length;
 
         Arrays.sort(nums);
 
-        for (int standard = 0; standard < N - 2; standard++) {
+        for (int standard = 0; standard < n - 2; standard++) {
             int left = standard + 1;
-            int right = N - 1;
+            int right = n - 1;
 
             if (standard > 0 && nums[standard] == nums[standard - 1]) {
                 continue;

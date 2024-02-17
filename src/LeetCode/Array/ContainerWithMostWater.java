@@ -3,17 +3,17 @@ package LeetCode.Array;
 public class ContainerWithMostWater {
     public int maxArea(int[] height) {
         int max = 0;
-        int start = 0;
-        int end = height.length - 1;
+        int left = 0;
+        int right = height.length - 1;
 
-        while (start < end) {
-            int standard = Math.min(height[start], height[end]);
-            int gap = (end - start) * standard;
+        while (left < right) {
+            int standard = Math.min(height[left], height[right]);
+            int gap = (right - left) * standard;
 
-            if (height[end] > height[start]) {
-                start++;
+            if (height[right] > height[left]) {
+                left++;
             } else {
-                end--;
+                right--;
             }
 
             max = Math.max(max, gap);
