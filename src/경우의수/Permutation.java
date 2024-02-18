@@ -11,12 +11,10 @@ class Permutation {
         int[] arr = {3, 6, 9};
         List<List<Integer>> result = getPermutation(n, m, arr);
 
-        for (List<Integer> perm : result) {
-            System.out.println(perm);
-        }
+        result.forEach(System.out::println);
     }
 
-    public static List<List<Integer>> getPermutation(int n, int m, int[] arr) {
+    private static List<List<Integer>> getPermutation(int n, int m, int[] arr) {
         boolean[] visited = new boolean[n];
         List<Integer> temp = new ArrayList<>();
         List<List<Integer>> answer = new ArrayList<>();

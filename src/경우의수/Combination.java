@@ -11,12 +11,10 @@ class Combination {
         int[] arr = {1, 2, 3, 4, 5};
         List<List<Integer>> result = getCombination(n, m, arr);
 
-        for (List<Integer> comb : result) {
-            System.out.println(comb);
-        }
+        result.forEach(System.out::println);
     }
 
-    public static List<List<Integer>> getCombination(int n, int m, int[] arr) {
+    private static List<List<Integer>> getCombination(int n, int m, int[] arr) {
         List<Integer> temp = new ArrayList<>();
         List<List<Integer>> answer = new ArrayList<>();
 

@@ -8,12 +8,13 @@ public class LongestPalindromeSubstring {
 
     public String longestPalindrome(String s) {
         int n = s.length();
-        boolean isPalindrome = isPalindrome(s);
-        if (isPalindrome)
-            return s;
+
+        if(isPalindrome(s)) return s;
+
         int maxLength = 1;
         int start = 0;
         int left, right;
+
         for (int i = 0; i < n; i++) {
             left = i - 1;
             right = i + 1;
@@ -29,9 +30,8 @@ public class LongestPalindromeSubstring {
                 right++;
             }
 
-            int length = right - left - 1;
-            if (maxLength < length) {
-                maxLength = length;
+            if (maxLength < right - left - 1) {
+                maxLength = right - left - 1;
                 start = left + 1;
             }
         }

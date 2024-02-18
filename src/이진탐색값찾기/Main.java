@@ -8,35 +8,35 @@ import java.util.*;
 public class Main {
 
     // 이진 탐색 소스코드 구현(반복문)
-    public static int binarySearch(int[] arr, int target, int start, int end) {
-        while(start <= end) {
-            int mid = (start + end) / 2;
+    public static int binarySearch(int[] arr, int target, int left, int right) {
+        while(left <= right) {
+            int mid = (left + right) / 2;
             // 찾은 경우 중간점 인덱스 반환
             if (arr[mid] == target) return mid;
             // 중간점의 값보다 찾고자 하는 값이 작은 경우 왼쪽 확인
-            else if (arr[mid] > target) end = mid - 1;
+            else if (arr[mid] > target) right = mid - 1;
             // 중간점의 값보다 찾고자 하는 값이 큰 경우 오른쪽 확인
-            else start = mid + 1;
+            else left = mid + 1;
         }
         return -1;
     }
 
 //    // 재귀적 이진 탐색 메소드
-//    public static int binarySearch(int[] arr, int target, int low, int high) {
-//        if (low > high) {
+//    public static int binarySearch(int[] arr, int target, int left, int right) {
+//        if (left > right) {
 //            return -1; // 요소를 찾지 못한 경우
 //        }
 //
-//        int mid = low + (high - low) / 2;
+//        int mid = left + (right - left) / 2;
 //
 //        if (arr[mid] == target) {
 //            return mid; // 요소를 찾은 경우
 //        } else if (arr[mid] > target) {
 //            // 중간 값이 찾는 값보다 큰 경우, 왼쪽 부분 배열에서 다시 탐색
-//            return binarySearch(arr, target, low, mid - 1);
+//            return binarySearch(arr, target, left, mid - 1);
 //        } else {
 //            // 중간 값이 찾는 값보다 작은 경우, 오른쪽 부분 배열에서 다시 탐색
-//            return binarySearch(arr, target, mid + 1, high);
+//            return binarySearch(arr, target, mid + 1, right);
 //        }
 //    }
 

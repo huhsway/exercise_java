@@ -4,22 +4,22 @@ import java.util.*;
 
 class Solution {
 
-    public int lowerBound(List<String> arr, String target, int start, int end) {
-        while (start < end) {
-            int mid = (start + end) / 2;
-            if (arr.get(mid).compareTo(target) >= 0) end = mid;
-            else start = mid + 1;
+    public int lowerBound(List<String> arr, String target, int left, int right) {
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (arr.get(mid).compareTo(target) >= 0) right = mid;
+            else left = mid + 1;
         }
-        return end;
+        return right;
     }
 
-    public int upperBound(List<String> arr, String target, int start, int end) {
-        while (start < end) {
-            int mid = (start + end) / 2;
-            if (arr.get(mid).compareTo(target) > 0) end = mid;
-            else start = mid + 1;
+    public int upperBound(List<String> arr, String target, int left, int right) {
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (arr.get(mid).compareTo(target) > 0) right = mid;
+            else left = mid + 1;
         }
-        return end;
+        return right;
     }
 
     public int countByRange(List<String> arr, String leftValue, String rightValue) {
@@ -29,7 +29,7 @@ class Solution {
     }
 
     public int[] solution(String[] words, String[] queries) {
-        List<Integer> ans = new ArrayList<>();
+        List<Integer> answer = new ArrayList<>();
         List<List<String>> arr = new ArrayList<>(10001);
         List<List<String>> reversedArr = new ArrayList<>(10001);
 
@@ -50,25 +50,20 @@ class Solution {
         }
 
         for (String query : queries) {
-            int res = 0;
+            int result = 0;
             int len = query.length();
 
             if (query.charAt(0) != '?') {
-                res = countByRange(arr.get(len), query.replaceAll("\\?", "a"), query.replaceAll("\\?", "z"));
+                result = countByRange(arr.get(len), query.replaceAll("\\?", "a"), query.replaceAll("\\?", "z"));
             } else {
                 query = new StringBuilder(query).reverse().toString();
-                res = countByRange(reversedArr.get(len), query.replaceAll("\\?", "a"), query.replaceAll("\\?", "z"));
+                result = countByRange(reversedArr.get(len), query.replaceAll("\\?", "a"), query.replaceAll("\\?", "z"));
             }
 
-            ans.add(res);
+            answer.add(result);
         }
 
-        int[] answer = new int[ans.size()];
-        for (int i = 0; i < ans.size(); i++) {
-            answer[i] = ans.get(i);
-        }
-
-        return answer;
+        return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 
     public static void main(String[] args) {

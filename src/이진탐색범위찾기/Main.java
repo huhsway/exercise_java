@@ -7,27 +7,27 @@ import java.util.*;
 
 public class Main {
 
-    public static int lowerBound(int[] arr, int target, int start, int end) {
-        while (start < end) {
-            int mid = (start + end) / 2;
-            if (arr[mid] >= target) end = mid;
-            else start = mid + 1;
+    public static int lowerBound(int[] arr, int target, int left, int right) {
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (arr[mid] >= target) right = mid;
+            else left = mid + 1;
         }
-        return end;
+        return right;
     }
 
-    public static int upperBound(int[] arr, int target, int start, int end) {
-        while (start < end) {
-            int mid = (start + end) / 2;
-            if (arr[mid] > target) end = mid;
-            else start = mid + 1;
+    public static int upperBound(int[] arr, int target, int left, int right) {
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (arr[mid] > target) right = mid;
+            else left = mid + 1;
         }
-        return end;
+        return right;
     }
 
     // 값이 [left_value, right_value]인 데이터의 개수를 반환하는 함수
     public static int countByRange(int[] arr, int leftValue, int rightValue) {
-        // 유의: lowerBound와 upperBound는 end 변수의 값을 배열의 길이로 설정
+        // 유의: lowerBound와 upperBound는 right 변수의 값을 배열의 길이로 설정
         int rightIndex = upperBound(arr, rightValue, 0, arr.length);
         int leftIndex = lowerBound(arr, leftValue, 0, arr.length);
         return rightIndex - leftIndex;
