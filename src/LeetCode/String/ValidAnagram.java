@@ -14,6 +14,9 @@ public class ValidAnagram {
             tMap.put(c, tMap.getOrDefault(c, 0) + 1);
         }
 
+        // 만약 출력 하려면
+        // sMap.forEach((key, value) -> System.out.println(key + ": " + value));
+
         return Arrays.equals(sMap.entrySet().toArray(), tMap.entrySet().toArray());
     }
 

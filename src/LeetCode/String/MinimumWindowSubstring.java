@@ -47,7 +47,7 @@ public class MinimumWindowSubstring {
 
     public static void main(String[] args) {
         MinimumWindowSubstring solution = new MinimumWindowSubstring();
-        String s = "AAAABBC";
+        String s = "AAAAAABC";
         String t = "ABC";
         String minWindow = solution.minWindow(s, t);
         System.out.println("Min Window Substring: " + minWindow);

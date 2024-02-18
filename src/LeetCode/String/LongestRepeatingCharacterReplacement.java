@@ -9,13 +9,11 @@ public class LongestRepeatingCharacterReplacement {
         Map<Character, Integer> visited = new HashMap<>();
 
         while (right < s.length()) { // 초깃값 left, right = 0
-            char charAtRight = s.charAt(right);
-            visited.put(charAtRight, visited.getOrDefault(charAtRight, 0) + 1);
-            maxCharCount = Math.max(maxCharCount, visited.get(charAtRight));
+            visited.put(s.charAt(right), visited.getOrDefault(s.charAt(right), 0) + 1);
+            maxCharCount = Math.max(maxCharCount, visited.get(s.charAt(right)));
 
             if (right - left + 1 - maxCharCount > k) {
-                char charAtLeft = s.charAt(left);
-                visited.put(charAtLeft, visited.get(charAtLeft) - 1);
+                visited.put(s.charAt(left), visited.get(s.charAt(left)) - 1);
                 left++;
             }
 
