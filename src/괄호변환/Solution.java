@@ -16,10 +16,10 @@ class Solution {
     }
 
     // "올바른 괄호 문자열"인지 판단
-    public boolean checkProper(String s) {
+    public boolean checkProper(String u) {
         int count = 0; // 왼쪽 괄호의 개수
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') count += 1;
+        for (int i = 0; i < u.length(); i++) {
+            if (u.charAt(i) == '(') count += 1;
             else {
                 if (count == 0) { // 쌍이 맞지 않는 경우에 false 반환
                     return false;

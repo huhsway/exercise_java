@@ -23,9 +23,12 @@ public class BfsApplication {
 
     private static int bfs(int y, int x) {
         Queue<Position> queue = new LinkedList<>();
+
+        // add()는 LinkedList가 고정 크기를 가지고 있다면 가득 차있을 때 예외를 throw하고 offer()는 LinkedList가 가득 차있을 때 즉시 false를 반환하고 예외를 throw하지 않습니다.
         queue.offer(new Position(y, x));
 
         while (!queue.isEmpty()) {
+            // poll() 메서드는 큐의 맨 앞에서 요소를 제거하고 반환합니다. 만약 큐가 비어있는 경우에는 null을 반환합니다.
             Position pos = queue.poll();
             y = pos.y;
             x = pos.x;

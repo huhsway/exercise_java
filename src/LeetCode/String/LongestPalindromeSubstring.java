@@ -1,5 +1,6 @@
 package LeetCode.String;
 
+// https://leetcode.com/problems/longest-palindromic-substring/
 public class LongestPalindromeSubstring {
     public boolean isPalindrome(String s) {
         String rev = new StringBuilder(s).reverse().toString();

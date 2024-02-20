@@ -1,5 +1,6 @@
 package LeetCode.Array;
 
+//  https://leetcode.com/problems/maximum-product-subarray/
 public class MaximumProductSubarray {
     public int maxProduct(int[] nums) {
         int result = Integer.MIN_VALUE;

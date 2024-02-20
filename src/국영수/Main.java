@@ -6,6 +6,42 @@ import java.io.*;
 
 // https://velog.io/@xxwb__/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4-%EC%A0%95%EB%A0%AC-%EA%B5%AD%EC%98%81%EC%88%98
 
+/*
+1. 국어 내림
+2. 국어 같으면 영어 오름
+3. 국어, 영어 같으면 수학 내림
+4. 국어, 영어, 수학 같으면 이름 올림
+
+입력 예시
+12
+Junkyu 50 60 100
+SangKeun 80 60 50
+Sunyoung 80 70 100
+Soong 50 60 90
+Haebin 50 60 100
+Kangsoo 60 80 100
+Donghyuk 80 60 100
+Sei 70 70 70
+Wonseob 70 70 90
+Sanghyun 70 70 80
+nsj 80 80 80
+Taewhan 50 60 90
+
+출력 예시
+Donghyuk
+Sangkeun
+Sunyoung
+nsj
+Wonseob
+Sanghyun
+Sei
+Kangsoo
+Haebin
+Junkyu
+Soong
+Taewhan
+ */
+
 //class Student implements Comparable<Student> {
 //
 //    private String name;
@@ -84,7 +120,7 @@ import java.io.*;
 
 class Main {
 
-//    private static class Student {
+//    public static class Student {
 //        private String name;
 //        private int kor;
 //        private int eng;
@@ -174,14 +210,23 @@ class Main {
             arr.add(item.split(" "));
         }
 
-        arr.sort(Comparator.<String[], Integer>comparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
-                .thenComparing(a -> Integer.parseInt(a[2]))
-                .thenComparing(a -> Integer.parseInt(a[3]), Comparator.reverseOrder())
-                .thenComparing(a -> a[0]));
+        Arrays.stream(data)
+                .map(i -> i.split(" "))
+                .sorted(Comparator.<String[], Integer>comparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
+                        .thenComparing(a -> Integer.parseInt(a[2]))
+                        .thenComparing(a -> Integer.parseInt(a[3]), Comparator.reverseOrder())
+                        .thenComparing(a -> a[0]))
+                .map(s -> s[0])
+                .forEach(System.out::println);
 
-        names = arr.stream().map(a -> a[0]).collect(Collectors.toList());
-
-        names.forEach(System.out::println);
+//        arr.sort(Comparator.<String[], Integer>comparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
+//                .thenComparing(a -> Integer.parseInt(a[2]))
+//                .thenComparing(a -> Integer.parseInt(a[3]), Comparator.reverseOrder())
+//                .thenComparing(a -> a[0]));
+//
+//        names = arr.stream().map(a -> a[0]).collect(Collectors.toList());
+//
+//        names.forEach(System.out::println);
     }
 
 }

@@ -2,6 +2,7 @@ package LeetCode.String;
 
 import java.util.*;
 
+// https://leetcode.com/problems/group-anagrams/
 public class GroupAnagrams {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> hashMap = new HashMap<>();
