@@ -8,7 +8,7 @@ public class MaximumSubarray {
 
         for (int i = 1; i < nums.length; i++) {
             maxValue = Math.max(maxValue + nums[i], nums[i]);
-            result = Math.max(maxValue, result);
+            result = Math.max(result, maxValue);
         }
 
         return result;
