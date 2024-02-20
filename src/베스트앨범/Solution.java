@@ -10,24 +10,24 @@ import java.util.*;
  * 장르 내에서 많이 재생된 노래 순으로, 인덱스 낮은 순으로 정렬하고 최대 2개 저장
  */
 
-class Song implements Comparable<Song> {
-    String genre;
-    int plays;
-    int index;
-
-    public Song(String genre, int plays, int index) {
-        this.genre = genre;
-        this.plays = plays;
-        this.index = index;
-    }
-
-    @Override
-    public int compareTo(Song other) {
-        return this.plays == other.plays ? this.index - other.index : other.plays - this.plays;
-    }
-}
-
 public class Solution {
+    public static class Song implements Comparable<Song> {
+        String genre;
+        int plays;
+        int index;
+
+        public Song(String genre, int plays, int index) {
+            this.genre = genre;
+            this.plays = plays;
+            this.index = index;
+        }
+
+        @Override
+        public int compareTo(Song other) {
+            return this.plays == other.plays ? this.index - other.index : other.plays - this.plays;
+        }
+    }
+
     public int[] solution(String[] genres, int[] plays) {
         Map<String, Integer> genreTotalPlays = new HashMap<>();
         Map<String, PriorityQueue<Song>> genreSongs = new HashMap<>();
