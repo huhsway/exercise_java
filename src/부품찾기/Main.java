@@ -13,12 +13,12 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());
         // 집합(Set) 정보를 처리하기 위한 HashSet 라이브러리
-        Set<Integer> s = new HashSet<>();
+        Set<Integer> hashSet = new HashSet<>();
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
             int x = Integer.parseInt(st.nextToken());
-            s.add(x);
+            hashSet.add(x);
         }
 
         // M(손님이 확인 요청한 부품 개수)
@@ -33,7 +33,7 @@ public class Main {
         // 손님이 확인 요청한 부품 번호를 하나씩 확인
         for (int i = 0; i < m; i++) {
             // 해당 부품이 존재하는지 확인
-            if (s.contains(targets[i])) {
+            if (hashSet.contains(targets[i])) {
                 System.out.print("yes ");
             }
             else {

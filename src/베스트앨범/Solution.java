@@ -10,23 +10,30 @@ import java.util.*;
  * 장르 내에서 많이 재생된 노래 순으로, 인덱스 낮은 순으로 정렬하고 최대 2개 저장
  */
 
-public class Solution {
-    public static class Song implements Comparable<Song> {
-        String genre;
-        int plays;
-        int index;
+class Song implements Comparable<Song> {
 
-        public Song(String genre, int plays, int index) {
-            this.genre = genre;
-            this.plays = plays;
-            this.index = index;
-        }
+    private final String genre;
+    private final int plays;
+    private final int index;
 
-        @Override
-        public int compareTo(Song other) {
-            return this.plays == other.plays ? this.index - other.index : other.plays - this.plays;
-        }
+    public Song(String genre, int plays, int index) {
+        this.genre = genre;
+        this.plays = plays;
+        this.index = index;
     }
+
+    public int getIndex() {
+        return this.index;
+    }
+
+    @Override
+    public int compareTo(Song other) {
+        return this.plays == other.plays ? this.index - other.index : other.plays - this.plays;
+    }
+}
+
+public class Solution {
+
 
     public int[] solution(String[] genres, int[] plays) {
         Map<String, Integer> genreTotalPlays = new HashMap<>();
@@ -44,6 +51,11 @@ public class Solution {
         List<String> genreList = new ArrayList<>(genreTotalPlays.keySet());
         genreList.sort((a, b) -> genreTotalPlays.get(b) - genreTotalPlays.get(a));
 
+//        List<String> genreList = genreTotalPlays.entrySet().stream()
+//                .sorted((a, b) -> b.getValue() - a.getValue())
+//                .map(Map.Entry::getKey)
+//                .toList();
+
         List<Integer> answerList = new ArrayList<>();
 
         for (String genre : genreList) {
@@ -51,7 +63,7 @@ public class Solution {
             int count = 0;
 
             while (!songs.isEmpty() && count < 2) {
-                answerList.add(songs.poll().index);
+                answerList.add(songs.poll().getIndex());
                 count++;
             }
         }
