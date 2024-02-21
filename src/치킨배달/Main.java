@@ -8,21 +8,29 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 class Node {
-    int y;
-    int x;
+    private int y;
+    private int x;
 
     public Node(int y, int x) {
         this.y = y;
         this.x = x;
     }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
 }
 
 public class Main {
 
-    static int n, m;
-    static int[][] city;
-    static List<Node> house = new ArrayList<>();
-    static List<Node> chicken = new ArrayList<>();
+    private static int n, m;
+    private static int[][] city;
+    private static List<Node> house = new ArrayList<>();
+    private static List<Node> chicken = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -53,12 +61,12 @@ public class Main {
         System.out.println(answer);
     }
 
-    static int getMinDistance(List<Node> house, List<Node> candidate) {
+    private static int getMinDistance(List<Node> house, List<Node> candidate) {
         int sum = 0;
         for (Node h : house) {
             int min = Integer.MAX_VALUE;
             for (Node c : candidate) {
-                int distance = Math.abs(h.x - c.x) + Math.abs(h.y - c.y);
+                int distance = Math.abs(h.getY() - c.getY()) + Math.abs(h.getX() - c.getX());
                 min = Math.min(min, distance);
             }
             sum += min;
@@ -66,7 +74,7 @@ public class Main {
         return sum;
     }
 
-    static List<List<Node>> getCombination(int n, int m, List<Node> arr) {
+    private static List<List<Node>> getCombination(int n, int m, List<Node> arr) {
         List<List<Node>> result = new ArrayList<>();
         List<Node> temp = new ArrayList<>();
 
@@ -75,9 +83,10 @@ public class Main {
         return result;
     }
 
-    static void dfs(int n, int m, List<Node> arr, int depth, int start, List<Node> temp, List<List<Node>> result) {
+    private static void dfs(int n, int m, List<Node> arr, int depth, int start, List<Node> temp, List<List<Node>> result) {
         if (depth == m) {
-            result.add(new ArrayList<>(temp));
+//            result.add(temp); // 얕은 복사 temp 리스트의 참조가 그대로 리스트에 추가되서 temp가 변경될 때마다 result 리스트의 항목도 변경됨
+            result.add(new ArrayList<>(temp)); // 깊은 복사 temp 리스트의 요소들을 새로운 ArrayList 객체에 복사헤서 temp와 result가 독립적으로 유지
         } else {
             for (int i = start; i < n; i++) {
                 temp.add(arr.get(i));
