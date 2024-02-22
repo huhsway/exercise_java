@@ -1,6 +1,9 @@
 package 자료구조.해시테이블;
 
-import java.util.*;
+/*
+멤버변수 DEFAULT_CAPACITY, keys, values, capacity, size
+멤버함수 getHash, resize, put, findByHash, get, remove, containsKey, size
+ */
 public class MyHashTable<K, V> {
 
     private static final int DEFAULT_CAPACITY = 10;
@@ -18,6 +21,7 @@ public class MyHashTable<K, V> {
 
     private int getHash(K key) {
         int hash = 0;
+        // hash = key.toString().chars().sum();
         char[] arr = key.toString().toCharArray();
         for (char c : arr) {
             hash += (int) c;
@@ -25,18 +29,41 @@ public class MyHashTable<K, V> {
         return hash % capacity;
     }
 
-    public void put(K key, V value) {
-        int index = getHash(key);
-        while (keys[index] != null) {
-            if (keys[index].equals(key)) {
-                values[index] = value;
-                return;
+    private void resize() {
+        int oldCapacity = capacity; // 기존 용량을 저장
+        capacity *= 2; // 용량 2배 증가
+        Object[] newKeys = new Object[capacity];
+        Object[] newValues = new Object[capacity];
+
+        for (int i = 0; i < oldCapacity; i++) {
+            if (keys[i] != null) {
+                K currentKey = (K) keys[i];
+                V currentValue = (V) values[i];
+                int hash = getHash(currentKey);
+                while (newKeys[hash] != null) {
+                    hash = (hash + 1) % capacity;
+                }
+                newKeys[hash] = currentKey;
+                newValues[hash] = currentValue;
             }
-            index = (index + 1) % capacity;
         }
 
-        keys[index] = key;
-        values[index] = value;
+        keys = newKeys;
+        values = newValues;
+    }
+
+    public void put(K key, V value) {
+        int hash = getHash(key);
+        while (keys[hash] != null) {
+            if (keys[hash].equals(key)) {
+                values[hash] = value;
+                return;
+            }
+            hash = (hash + 1) % capacity;
+        }
+
+        keys[hash] = key;
+        values[hash] = value;
         size++;
 
         if ((double) size / capacity > 0.7) {
@@ -44,59 +71,36 @@ public class MyHashTable<K, V> {
         }
     }
 
-    private void resize() {
-        int newCapacity = capacity * 2;
-        Object[] newKeys = new Object[newCapacity];
-        Object[] newValues = new Object[newCapacity];
-
-        for (int i = 0; i < capacity; i++) {
-            if (keys[i] != null) {
-                K currentKey = (K) keys[i];
-                V currentValue = (V) values[i];
-                int index = getHash(currentKey);
-                while (newKeys[index] != null) {
-                    index = (index + 1) % newCapacity;
-                }
-                newKeys[index] = currentKey;
-                newValues[index] = currentValue;
+    private int findByHash(K key) {
+        int hash = getHash(key);
+        while (keys[hash] != null) {
+            if (keys[hash].equals(key)) {
+                return hash;
             }
-        }
-
-        keys = newKeys;
-        values = newValues;
-        capacity = newCapacity;
-    }
-
-    private int findByIndex(K key) {
-        int index = getHash(key);
-        while (keys[index] != null) {
-            if (keys[index].equals(key)) {
-                return index;
-            }
-            index = (index + 1) % capacity;
+            hash = (hash + 1) % capacity;
         }
         return -1;
     }
 
     public V get(K key) {
-        int index = findByIndex(key);
-        if (index != -1) {
-            return (V) values[index];
+        int hash = findByHash(key);
+        if (hash != -1) {
+            return (V) values[hash];
         }
         return null;
     }
 
     public void remove(K key) {
-        int index = findByIndex(key);
-        if (index != -1) {
-            keys[index] = null;
-            values[index] = null;
+        int hash = findByHash(key);
+        if (hash != -1) {
+            keys[hash] = null;
+            values[hash] = null;
             size--;
         }
     }
 
     public boolean containsKey(K key) {
-        return findByIndex(key) != -1;
+        return findByHash(key) != -1;
     }
 
     public int size() {
