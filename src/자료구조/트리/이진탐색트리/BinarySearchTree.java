@@ -1,136 +1,95 @@
 package 자료구조.트리.이진탐색트리;
 
-class Node {
-    private int key;
-    private Node left, right;
+class BinarySearchTree {
+    int value;
+    BinarySearchTree left;
+    BinarySearchTree right;
 
-    public Node(int item) {
-        this.key = item;
-        this.left = this.right = null;
+    BinarySearchTree(int value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
     }
 
-    // Getter and Setter methods for encapsulation
-    public int getKey() {
-        return key;
+    void insert(int value) {
+        if (value < this.value) {
+            if (this.left == null) {
+                this.left = new BinarySearchTree(value);
+            } else {
+                this.left.insert(value);
+            }
+        } else if (value > this.value) {
+            if (this.right == null) {
+                this.right = new BinarySearchTree(value);
+            } else {
+                this.right.insert(value);
+            }
+        }
     }
 
-    public Node getLeft() {
-        return left;
+    boolean contains(int value) {
+        if (value == this.value) {
+            return true;
+        } else if (value < this.value && this.left != null) {
+            return this.left.contains(value);
+        } else if (value > this.value && this.right != null) {
+            return this.right.contains(value);
+        }
+        return false;
     }
 
-    public void setLeft(Node left) {
-        this.left = left;
+    void preorder() {
+        System.out.print(this.value + " ");
+        if (this.left != null) {
+            this.left.preorder();
+        }
+        if (this.right != null) {
+            this.right.preorder();
+        }
     }
 
-    public Node getRight() {
-        return right;
+    void inorder() {
+        if (this.left != null) {
+            this.left.inorder();
+        }
+        System.out.print(this.value + " ");
+        if (this.right != null) {
+            this.right.inorder();
+        }
     }
 
-    public void setRight(Node right) {
-        this.right = right;
+    void postorder() {
+        if (this.left != null) {
+            this.left.postorder();
+        }
+        if (this.right != null) {
+            this.right.postorder();
+        }
+        System.out.print(this.value + " ");
     }
 }
 
-class BinarySearchTree {
-    private Node root;
-
-    public BinarySearchTree() {
-        this.root = null;
-    }
-
-    // Insert a node into the BST
-    public void insert(int key) {
-        root = insertRecursive(root, key);
-    }
-
-    private Node insertRecursive(Node root, int key) {
-        if (root == null) {
-            return new Node(key);
-        }
-
-        if (key < root.getKey()) {
-            root.setLeft(insertRecursive(root.getLeft(), key));
-        } else if (key > root.getKey()) {
-            root.setRight(insertRecursive(root.getRight(), key));
-        }
-
-        return root;
-    }
-
-    // Search for a node in the BST
-    public boolean search(int key) {
-        return searchRecursive(root, key);
-    }
-
-    private boolean searchRecursive(Node root, int key) {
-        if (root == null) {
-            return false;
-        }
-
-        if (key == root.getKey()) {
-            return true;
-        }
-
-        return key < root.getKey() ? searchRecursive(root.getLeft(), key) : searchRecursive(root.getRight(), key);
-    }
-
-    // Preorder Traversal
-    public void preorderTraversal() {
-        preorderTraversalRecursive(root);
-    }
-
-    private void preorderTraversalRecursive(Node root) {
-        if (root != null) {
-            System.out.print(root.getKey() + " ");
-            preorderTraversalRecursive(root.getLeft());
-            preorderTraversalRecursive(root.getRight());
-        }
-    }
-
-    // Inorder Traversal
-    public void inorderTraversal() {
-        inorderTraversalRecursive(root);
-    }
-
-    private void inorderTraversalRecursive(Node root) {
-        if (root != null) {
-            inorderTraversalRecursive(root.getLeft());
-            System.out.print(root.getKey() + " ");
-            inorderTraversalRecursive(root.getRight());
-        }
-    }
-
-    // Postorder Traversal
-    public void postorderTraversal() {
-        postorderTraversalRecursive(root);
-    }
-
-    private void postorderTraversalRecursive(Node root) {
-        if (root != null) {
-            postorderTraversalRecursive(root.getLeft());
-            postorderTraversalRecursive(root.getRight());
-            System.out.print(root.getKey() + " ");
-        }
-    }
-
+class Main {
     public static void main(String[] args) {
-        BinarySearchTree tree = new BinarySearchTree();
+        BinarySearchTree rootNode = new BinarySearchTree(10);
+        rootNode.insert(7);
+        rootNode.insert(8);
+        rootNode.insert(12);
+        rootNode.insert(11);
 
-        // Insert nodes
-        tree.insert(50);
-        tree.insert(30);
-        tree.insert(20);
-        tree.insert(40);
-        tree.insert(70);
-        tree.insert(60);
-        tree.insert(80);
+        System.out.println(rootNode.left.right.value); // 8
+        System.out.println(rootNode.right.left.value); // 11
 
-        // Search for nodes
-        System.out.println("Search for 30: " + tree.search(30));
-        System.out.println("Search for 45: " + tree.search(45));
+        System.out.print("Preorder traversal: ");
+        rootNode.preorder();
+        System.out.println();
 
-        // Inorder traversal
-        System.out.println("Inorder Traversal: ");
-        tree.inorderTraversal();
+        System.out.print("Inorder traversal: ");
+        rootNode.inorder();
+        System.out.println();
+
+        System.out.print("Postorder traversal: ");
+        rootNode.postorder();
+        System.out.println();
     }
 }
