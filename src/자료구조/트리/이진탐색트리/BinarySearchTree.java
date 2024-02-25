@@ -1,17 +1,29 @@
 package 자료구조.트리.이진탐색트리;
 
-class BinarySearchTree {
-    int value;
-    BinarySearchTree left;
-    BinarySearchTree right;
+public class BinarySearchTree {
+    private int value;
+    private BinarySearchTree left;
+    private BinarySearchTree right;
 
-    BinarySearchTree(int value) {
+    public int getValue() {
+        return this.value;
+    }
+
+    public BinarySearchTree getLeft() {
+        return this.left;
+    }
+
+    public BinarySearchTree getRight() {
+        return this.right;
+    }
+
+    public BinarySearchTree(int value) {
         this.value = value;
         this.left = null;
         this.right = null;
     }
 
-    void insert(int value) {
+    public void insert(int value) {
         if (value < this.value) {
             if (this.left == null) {
                 this.left = new BinarySearchTree(value);
@@ -27,7 +39,7 @@ class BinarySearchTree {
         }
     }
 
-    boolean contains(int value) {
+    public boolean contains(int value) {
         if (value == this.value) {
             return true;
         } else if (value < this.value && this.left != null) {
@@ -38,7 +50,7 @@ class BinarySearchTree {
         return false;
     }
 
-    void preorder() {
+    public void preorder() {
         System.out.print(this.value + " ");
         if (this.left != null) {
             this.left.preorder();
@@ -48,7 +60,7 @@ class BinarySearchTree {
         }
     }
 
-    void inorder() {
+    public void inorder() {
         if (this.left != null) {
             this.left.inorder();
         }
@@ -58,7 +70,7 @@ class BinarySearchTree {
         }
     }
 
-    void postorder() {
+    public void postorder() {
         if (this.left != null) {
             this.left.postorder();
         }
@@ -77,8 +89,8 @@ class Main {
         rootNode.insert(12);
         rootNode.insert(11);
 
-        System.out.println(rootNode.left.right.value); // 8
-        System.out.println(rootNode.right.left.value); // 11
+        System.out.println(rootNode.getLeft().getRight().getValue()); // 8
+        System.out.println(rootNode.getRight().getLeft().getValue()); // 11
 
         System.out.print("Preorder traversal: ");
         rootNode.preorder();
