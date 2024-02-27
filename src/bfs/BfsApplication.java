@@ -10,7 +10,7 @@ public class BfsApplication {
     private static class Position {
         int y, x;
 
-        Position(int y, int x) {
+        public Position(int y, int x) {
             this.y = y;
             this.x = x;
         }
