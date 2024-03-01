@@ -19,18 +19,18 @@ public class Dfs {
 
         boolean[] visited = new boolean[graph.size()];
 
-        dfs(graph, visited, 1);
+        dfs(graph, 1, visited);
 
     }
 
-    private static void dfs(List<List<Integer>> graph, boolean[] visited, int v) {
+    private static void dfs(List<List<Integer>> graph, int v, boolean[] visited) {
 
         visited[v] = true;
         System.out.println(v);
 
         for (int i : graph.get(v)) {
             if (!visited[i]) {
-                dfs(graph, visited, i);
+                dfs(graph, i, visited);
             }
         }
 

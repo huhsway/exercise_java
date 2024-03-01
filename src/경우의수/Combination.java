@@ -7,28 +7,28 @@ class Combination {
 
     public static void main(String[] args) {
         int n = 5;
-        int m = 2;
+        int r = 2;
         int[] arr = {1, 2, 3, 4, 5};
-        List<List<Integer>> result = getCombination(n, m, arr);
+        List<List<Integer>> result = getCombination(n, r, arr);
 
         result.forEach(System.out::println);
     }
 
-    private static List<List<Integer>> getCombination(int n, int m, int[] arr) {
+    private static List<List<Integer>> getCombination(int n, int r, int[] arr) {
         List<Integer> temp = new ArrayList<>();
         List<List<Integer>> answer = new ArrayList<>();
 
-        dfs(n, m, arr, 0, 0, temp, answer);
+        dfs(n, r, arr,  temp, answer, 0,0);
         return answer;
     }
 
-    private static void dfs(int n, int m, int[] arr, int depth, int start, List<Integer> temp, List<List<Integer>> answer) {
-        if (depth == m) {
+    private static void dfs(int n, int r, int[] arr, List<Integer> temp, List<List<Integer>> answer, int depth, int start) {
+        if (depth == r) {
             answer.add(new ArrayList<>(temp));
         } else {
             for (int i = start; i < n; i++) {
                 temp.add(arr[i]);
-                dfs(n, m, arr, depth + 1, i + 1, temp, answer);
+                dfs(n, r, arr,  temp, answer,depth + 1, i + 1);
                 temp.remove(temp.size() - 1); // backtrack
             }
         }

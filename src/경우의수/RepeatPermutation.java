@@ -8,30 +8,30 @@ public class RepeatPermutation {
 
     public static void main(String[] args) {
         int n = 3;
-        int m = 2;
+        int r = 2;
         int[] arr = {3, 6, 9};
-        List<List<Integer>> result = getRepeatPermutation(n, m, arr);
+        List<List<Integer>> result = getRepeatPermutation(n, r, arr);
 
         for (List<Integer> perm : result) {
             System.out.println(perm);
         }
     }
 
-    public static List<List<Integer>> getRepeatPermutation(int n, int m, int[] arr) {
+    public static List<List<Integer>> getRepeatPermutation(int n, int r, int[] arr) {
         List<Integer> temp = new ArrayList<>();
         List<List<Integer>> answer = new ArrayList<>();
 
-        dfs(n, m, arr, 0, temp, answer);
+        dfs(n, r, arr, temp, answer, 0);
         return answer;
     }
 
-    private static void dfs(int n, int m, int[] arr, int depth, List<Integer> temp, List<List<Integer>> answer) {
-        if (depth == m) {
+    private static void dfs(int n, int r, int[] arr, List<Integer> temp, List<List<Integer>> answer, int depth) {
+        if (depth == r) {
             answer.add(new ArrayList<>(temp));
         } else {
             for (int i = 0; i < n; i++) {
                 temp.add(arr[i]);
-                dfs(n, m, arr, depth + 1, temp, answer);
+                dfs(n, r, arr, temp, answer, depth + 1);
                 temp.remove(temp.size() - 1); // backtrack
             }
         }

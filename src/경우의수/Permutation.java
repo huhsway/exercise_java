@@ -7,23 +7,23 @@ class Permutation {
 
     public static void main(String[] args) {
         int n = 3;
-        int m = 2;
+        int r = 2;
         int[] arr = {3, 6, 9};
-        List<List<Integer>> result = getPermutation(n, m, arr);
+        List<List<Integer>> result = getPermutation(n, r, arr);
 
         result.forEach(System.out::println);
     }
 
-    private static List<List<Integer>> getPermutation(int n, int m, int[] arr) {
+    private static List<List<Integer>> getPermutation(int n, int r, int[] arr) {
         boolean[] visited = new boolean[n];
         List<Integer> temp = new ArrayList<>();
         List<List<Integer>> answer = new ArrayList<>();
 
-        dfs(n, m, arr, 0, visited, temp, answer);
+        dfs(n, r, arr,  visited, temp, answer, 0);
         return answer;
     }
 
-    private static void dfs(int n, int m, int[] arr, int depth, boolean[] visited, List<Integer> temp, List<List<Integer>> answer) {
+    private static void dfs(int n, int m, int[] arr, boolean[] visited, List<Integer> temp, List<List<Integer>> answer, int depth) {
         if (depth == m) {
             answer.add(new ArrayList<>(temp));
         } else {
@@ -31,7 +31,7 @@ class Permutation {
                 if (!visited[i]) {
                     visited[i] = true; // mark as visited
                     temp.add(arr[i]);
-                    dfs(n, m, arr, depth + 1,  visited, temp, answer);
+                    dfs(n, m, arr, visited, temp, answer, depth + 1);
                     temp.remove(temp.size() - 1); // backtrack
                     visited[i] = false; // reset the visited status
                 }

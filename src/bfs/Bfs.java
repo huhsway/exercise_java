@@ -29,7 +29,7 @@ public class Bfs {
         visited[start] = true;
 
         while (!queue.isEmpty()) {
-            int v = queue.poll();
+            int v = queue.poll(); // while문 안에서 꺼내자
             System.out.print(v + " ");
 
             for (int i : graph.get(v)) {

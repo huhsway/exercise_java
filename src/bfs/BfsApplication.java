@@ -29,7 +29,7 @@ public class BfsApplication {
 
         while (!queue.isEmpty()) {
             // poll() 메서드는 큐의 맨 앞에서 요소를 제거하고 반환합니다. 만약 큐가 비어있는 경우에는 null을 반환합니다.
-            Position pos = queue.poll();
+            Position pos = queue.poll(); // while문 안에서 꺼내자
             y = pos.y;
             x = pos.x;
 
