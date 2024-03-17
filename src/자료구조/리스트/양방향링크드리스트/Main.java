@@ -22,6 +22,13 @@ public class DoublyLinkedList<T> { // T는 제네릭 타입 파라미터
         this.tail = this.head;
     }
 
+    public void append(T value) { // 매개변수 타입을 T로 변경
+        Node<T> newNode = new Node<T>(value);
+        newNode.prev = this.tail;
+        this.tail.next = newNode;
+        this.tail = newNode;
+    }
+
     private Node<T> find(T item) { // 매개변수와 비교 대상의 타입을 T로 변경
         Node<T> currNode = this.head;
         while (currNode != null && !currNode.value.equals(item)) {
@@ -31,13 +38,6 @@ public class DoublyLinkedList<T> { // T는 제네릭 타입 파라미터
             throw new IllegalArgumentException("Item not found: " + item);
         }
         return currNode;
-    }
-
-    public void append(T value) { // 매개변수 타입을 T로 변경
-        Node<T> newNode = new Node<T>(value);
-        newNode.prev = this.tail;
-        this.tail.next = newNode;
-        this.tail = newNode;
     }
 
     public void insert(T value, T item) { // 매개변수 타입을 T로 변경
