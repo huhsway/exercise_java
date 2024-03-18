@@ -19,10 +19,10 @@ public class MinimumWindowSubstring {
 
         while (right < sLen) {
             if (map.containsKey(s.charAt(right))) {
+                map.put(s.charAt(right), map.get(s.charAt(right)) - 1);
                 if (map.get(s.charAt(right)) > 0) {
                     count--;
                 }
-                map.put(s.charAt(right), map.get(s.charAt(right)) - 1);
             }
             right++;
 
