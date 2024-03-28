@@ -206,10 +206,6 @@ class Main {
                 "David 25 8 100"
         };
 
-        for (String item : data) {
-            arr.add(item.split(" "));
-        }
-
         Arrays.stream(data)
                 .map(i -> i.split(" "))
                 .sorted(Comparator.<String[], Integer>comparing(a -> Integer.parseInt(a[1]), Comparator.reverseOrder())
