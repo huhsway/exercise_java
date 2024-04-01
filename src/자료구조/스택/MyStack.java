@@ -1,7 +1,5 @@
 package 자료구조.스택;
 
-import java.util.*;
-
 public class MyStack<T> {
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] elements;
@@ -14,8 +12,7 @@ public class MyStack<T> {
 
     public void push(T item) {
         if (size == elements.length) {
-            // 스택이 가득 차면 배열 크기를 늘린다.
-            elements = Arrays.copyOf(elements, size * 2);
+            increaseCapacity();
         }
         elements[size++] = item;
     }
@@ -43,6 +40,15 @@ public class MyStack<T> {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    private void increaseCapacity() {
+        int newCapacity = elements.length * 2;
+        Object[] newElements = new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
     }
 
     public static void main(String[] args) {

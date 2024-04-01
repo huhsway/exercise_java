@@ -1,7 +1,7 @@
 package 자료구조.트리.이진탐색트리;
 
 public class BinarySearchTree {
-    private int value;
+    private final int value;
     private BinarySearchTree left;
     private BinarySearchTree right;
 
@@ -79,9 +79,7 @@ public class BinarySearchTree {
         }
         System.out.print(this.value + " ");
     }
-}
 
-class Main {
     public static void main(String[] args) {
         BinarySearchTree rootNode = new BinarySearchTree(10);
         rootNode.insert(7);

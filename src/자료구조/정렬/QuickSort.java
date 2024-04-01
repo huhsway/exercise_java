@@ -15,15 +15,21 @@ public class QuickSort {
             return;
         }
 
+        int pivot = partition(array, start, end);
+        quickSort(array, start, pivot - 1);
+        quickSort(array, pivot + 1, end);
+    }
+
+    public static int partition(int[] array, int start, int end) {
         int pivot = start;
         int left = start + 1;
         int right = end;
 
         while (left <= right) {
-            while (left <= end && array[left] <= array[pivot]) {
+            while (left <= right && array[left] <= array[pivot]) {
                 left++;
             }
-            while (right > start && array[right] >= array[pivot]) {
+            while (left <= right && array[right] >= array[pivot]) {
                 right--;
             }
 
@@ -38,7 +44,6 @@ public class QuickSort {
             }
         }
 
-        quickSort(array, start, right - 1);
-        quickSort(array, right + 1, end);
+        return right;
     }
 }

@@ -18,7 +18,7 @@ public class MyQueue<T> {
 
     public void enqueue(T item) {
         if (isFull()) {
-            resize();
+            increaseCapacity();
         }
         rear = (rear + 1) % capacity;
         elements[rear] = item;
@@ -55,15 +55,16 @@ public class MyQueue<T> {
         return size == capacity;
     }
 
-    private void resize() {
-        capacity *= 2; // 용량을 2배로 증가
-        Object[] newElements = new Object[capacity];
+    private void increaseCapacity() {
+        int newCapacity = capacity * 2;
+        Object[] newElements = new Object[newCapacity];
         for (int i = 0; i < size; i++) {
-            newElements[i] = elements[(front + i) % elements.length];
+            newElements[i] = elements[(front + i) % capacity];
         }
         elements = newElements;
         front = 0;
         rear = size - 1;
+        capacity = newCapacity;
     }
 
     public static void main(String[] args) {
