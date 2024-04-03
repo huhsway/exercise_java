@@ -22,7 +22,9 @@ public class MergeSort {
 
     public static void merge(int[] arr, int left, int mid, int right) {
         int[] temp = new int[right - left + 1];
-        int i = left, j = mid + 1, k = 0;
+        int i = left;
+        int j = mid + 1;
+        int k = 0;
 
         while (i <= mid && j <= right) {
             if (arr[i] <= arr[j]) {

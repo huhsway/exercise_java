@@ -2,45 +2,43 @@ package 자료구조.정렬;
 
 public class QuickSort {
     public static void main(String[] args) {
-        int[] array = {7, 5, 9, 0, 3, 1, 6, 2, 4, 8};
-        quickSort(array, 0, array.length - 1);
+        int[] arr = {7, 5, 9, 0, 3, 1, 6, 2, 4, 8};
+        quickSort(arr, 0, arr.length - 1);
 
-        for (int num : array) {
+        for (int num : arr) {
             System.out.print(num + " ");
         }
     }
 
-    public static void quickSort(int[] array, int start, int end) {
-        if (start >= end) {
-            return;
+    public static void quickSort(int[] arr, int start, int end) {
+        if (start < end) {
+            int pivot = partition(arr, start, end);
+            quickSort(arr, start, pivot - 1);
+            quickSort(arr, pivot + 1, end);
         }
-
-        int pivot = partition(array, start, end);
-        quickSort(array, start, pivot - 1);
-        quickSort(array, pivot + 1, end);
     }
 
-    public static int partition(int[] array, int start, int end) {
+    public static int partition(int[] arr, int start, int end) {
         int pivot = start;
         int left = start + 1;
         int right = end;
 
         while (left <= right) {
-            while (left <= right && array[left] <= array[pivot]) {
+            while (left <= right && arr[left] <= arr[pivot]) {
                 left++;
             }
-            while (left <= right && array[right] >= array[pivot]) {
+            while (left <= right && arr[right] >= arr[pivot]) {
                 right--;
             }
 
             if (left > right) {
-                int temp = array[pivot];
-                array[pivot] = array[right];
-                array[right] = temp;
+                int temp = arr[pivot];
+                arr[pivot] = arr[right];
+                arr[right] = temp;
             } else {
-                int temp = array[left];
-                array[left] = array[right];
-                array[right] = temp;
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
             }
         }
 
