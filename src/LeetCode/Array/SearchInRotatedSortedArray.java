@@ -15,9 +15,9 @@ public class SearchInRotatedSortedArray {
 
             if (nums[mid] < nums[right]) {
                 if (target > nums[mid] && target <= nums[right]) {
-                    left = mid + 1;  // 여기에 세미콜론 추가
+                    left = mid + 1; 
                 } else {
-                    right = mid - 1;  // 여기에 세미콜론 추가
+                    right = mid - 1; 
                 }
             } else {
                 if (target >= nums[left] && target < nums[mid]) {
