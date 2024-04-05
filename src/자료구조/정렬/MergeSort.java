@@ -58,8 +58,8 @@ public class MergeSort {
         }
 
         // 임시 배열의 요소들을 원래 배열에 복사하여 병합 완료
-        for (i = left; i <= right; i++) {
-            arr[i] = temp[i - left];
+        for (int idx = left; idx <= right; idx++) {
+            arr[idx] = temp[idx - left];
         }
     }
 }
