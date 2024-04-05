@@ -9,17 +9,56 @@ public class PriorityQueue<T extends Comparable<T>> {
         this.heap = new Object[DEFAULT_CAPACITY];
         this.size = 0;
     }
+    private void heapifyUp() {
+        int index = size - 1;
+        while (index > 0) {
+            int parentIndex = (index - 1) / 2;
+            if (((T) heap[parentIndex]).compareTo((T) heap[index]) > 0) { // 최대힙: >, 최소힙: <
+                break;
+            }
 
-    public int size() {
-        return size;
+            // swap
+            Object temp = heap[index];
+            heap[index] = heap[parentIndex];
+            heap[parentIndex] = temp;
+
+            index = parentIndex;
+        }
     }
 
-    public boolean isEmpty() {
-        return size == 0;
+    private void heapifyDown() {
+        int newIndex = 0;
+        while (true) {
+            int leftChildIndex = 2 * newIndex + 1;
+            int rightChildIndex = 2 * newIndex + 2;
+            int index = newIndex;
+
+            // 왼쪽 자식 노드와 비교하여 더 작은 값을 가진 자식 노드를 찾음
+            if (leftChildIndex < size && ((T) heap[leftChildIndex]).compareTo((T) heap[index]) < 0) {
+                index = leftChildIndex;
+            }
+            // 오른쪽 자식 노드와 비교하여 더 작은 값을 가진 자식 노드를 찾음
+            if (rightChildIndex < size && ((T) heap[rightChildIndex]).compareTo((T) heap[index]) < 0) {
+                index = rightChildIndex;
+            }
+
+            // 현재 노드가 자식 노드와 바꿔야 할 경우에만 교체
+            if (index != newIndex) {
+                // swap
+                Object temp = heap[newIndex];
+                heap[newIndex] = heap[index];
+                heap[index] = temp;
+
+                newIndex = index;
+            } else {
+                break;
+            }
+        }
     }
+
 
     public T peek() {
-        if (isEmpty()) {
+        if (size == 0) {
             return null; // Return null if PriorityQueue is empty
         }
         return (T) heap[0];
@@ -27,14 +66,19 @@ public class PriorityQueue<T extends Comparable<T>> {
 
     public void push(T value) {
         if (size == heap.length) {
-            increaseCapacity();
+            int newCapacity = heap.length * 2;
+            Object[] newHeap = new Object[newCapacity];
+            for (int i = 0; i < heap.length; i++) {
+                newHeap[i] = heap[i];
+            }
+            heap = newHeap;
         }
         heap[size++] = value;
         heapifyUp();
     }
 
     public T pop() {
-        if (isEmpty()) {
+        if (size == 0) {
             return null; // Return null if PriorityQueue is empty
         }
 
@@ -45,153 +89,4 @@ public class PriorityQueue<T extends Comparable<T>> {
         heapifyDown();
         return poppedValue;
     }
-
-    private void heapifyUp() {
-        int index = size - 1;
-        while (index > 0) {
-            int parentIndex = (index - 1) / 2;
-            if (((T) heap[parentIndex]).compareTo((T) heap[index]) >= 0) { // 부모 >= 자식
-                break;
-            }
-            swap(index, parentIndex);
-            index = parentIndex;
-        }
-    }
-
-    private void heapifyDown() {
-        int index = 0;
-        while (true) {
-            int leftChildIndex = 2 * index + 1;
-            int rightChildIndex = 2 * index + 2;
-            int newIndex = index;
-
-            if (leftChildIndex < size && ((T) heap[leftChildIndex]).compareTo((T) heap[newIndex]) > 0) {
-                newIndex = leftChildIndex;
-            }
-            if (rightChildIndex < size && ((T) heap[rightChildIndex]).compareTo((T) heap[newIndex]) > 0) {
-                newIndex = rightChildIndex;
-            }
-
-            if (newIndex != index) {
-                swap(index, newIndex);
-                index = newIndex;
-            } else {
-                break;
-            }
-        }
-    }
-
-    private void swap(int i, int j) {
-        Object temp = heap[i];
-        heap[i] = heap[j];
-        heap[j] = temp;
-    }
-
-    private void increaseCapacity() {
-        int newCapacity = heap.length * 2;
-        Object[] newHeap = new Object[newCapacity];
-        for (int i = 0; i < heap.length; i++) {
-            newHeap[i] = heap[i];
-        }
-        heap = newHeap;
-    }
 }
-
-// 최소힙
-//public class PriorityQueue<T extends Comparable<T>> {
-//    private Object[] heap;
-//    private int size;
-//    private static final int DEFAULT_CAPACITY = 10;
-//
-//    public PriorityQueue() {
-//        this.heap = new Object[DEFAULT_CAPACITY];
-//        this.size = 0;
-//    }
-//
-//    public int size() {
-//        return size;
-//    }
-//
-//    public boolean isEmpty() {
-//        return size == 0;
-//    }
-//
-//    public T peek() {
-//        if (isEmpty()) {
-//            return null; // Return null if PriorityQueue is empty
-//        }
-//        return (T) heap[0];
-//    }
-//
-//    public void push(T value) {
-//        if (size == heap.length) {
-//            increaseCapacity();
-//        }
-//        heap[size++] = value;
-//        heapifyUp();
-//    }
-//
-//    public T pop() {
-//        if (isEmpty()) {
-//            return null; // Return null if PriorityQueue is empty
-//        }
-//
-//        T poppedValue = (T) heap[0];
-//        heap[0] = heap[size - 1];
-//        heap[size - 1] = null; // Clearing the reference
-//        size--;
-//        heapifyDown();
-//        return poppedValue;
-//    }
-//
-//    private void heapifyUp() {
-//        int index = size - 1;
-//        while (index > 0) {
-//            int parentIndex = (index - 1) / 2;
-//            if (((T) heap[parentIndex]).compareTo((T) heap[index]) <= 0) {
-//                break;
-//            }
-//            swap(index, parentIndex);
-//            index = parentIndex;
-//        }
-//    }
-//
-//    private void heapifyDown() {
-//        int index = 0;
-//
-//        while (true) {
-//            int leftChildIndex = 2 * index + 1;
-//            int rightChildIndex = 2 * index + 2;
-//            int newIndex = index;
-//
-//            if (leftChildIndex < size && ((T) heap[leftChildIndex]).compareTo((T) heap[newIndex]) < 0) {
-//                newIndex = leftChildIndex;
-//            }
-//            if (rightChildIndex < size && ((T) heap[rightChildIndex]).compareTo((T) heap[newIndex]) < 0) {
-//                newIndex = rightChildIndex;
-//            }
-//
-//            if (newIndex != index) {
-//                swap(index, newIndex);
-//                index = newIndex;
-//            } else {
-//                break;
-//            }
-//        }
-//    }
-//
-//    private void swap(int i, int j) {
-//        Object temp = heap[i];
-//        heap[i] = heap[j];
-//        heap[j] = temp;
-//    }
-//
-//    private void increaseCapacity() {
-//        int newCapacity = heap.length * 2;
-//        Object[] newHeap = new Object[newCapacity];
-//        for (int i = 0; i < heap.length; i++) {
-//            newHeap[i] = heap[i];
-//        }
-//        heap = newHeap;
-//    }
-//}
