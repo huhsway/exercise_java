@@ -9,7 +9,7 @@ public class MinimumWindowSubstring {
         int count = tLen;
         int start = 0;
         int left = 0;
-        int right = 0;
+        int right;
 
         Map<Character, Integer> map = new HashMap<>();
 
@@ -17,18 +17,17 @@ public class MinimumWindowSubstring {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        while (right < sLen) {
+        for (right = 0; right < sLen; right++) {
             if (map.containsKey(s.charAt(right))) {
                 map.put(s.charAt(right), map.get(s.charAt(right)) - 1);
-                if (map.get(s.charAt(right)) > 0) {
+                if (map.get(s.charAt(right)) >= 0) {
                     count--;
                 }
             }
-            right++;
 
             while (count == 0) {
-                if (right - left < minValue) {
-                    minValue = right - left;
+                if (right - left + 1 < minValue) {
+                    minValue = right - left + 1;
                     start = left;
                 }
 
@@ -41,6 +40,7 @@ public class MinimumWindowSubstring {
                 left++;
             }
         }
+
 
         return minValue == Integer.MAX_VALUE ? "" : s.substring(start, start + minValue);
     }
