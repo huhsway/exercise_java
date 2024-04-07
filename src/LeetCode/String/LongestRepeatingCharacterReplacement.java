@@ -37,4 +37,4 @@ public class LongestRepeatingCharacterReplacement {
         int result = solution.characterReplacement(s, k);
         System.out.println("Maximum length of substring after replacements: " + result);
     }
-}₩
+}
