@@ -3,24 +3,25 @@ package LeetCode.String;
 import java.util.*;
 public class MinimumWindowSubstring {
     public String minWindow(String s, String t) {
-        int sLen = s.length();
-        int tLen = t.length();
-        int minValue = Integer.MAX_VALUE;
-        int count = tLen;
-        int start = 0;
+
         int left = 0;
         int right;
+        int start = 0;
 
-        Map<Character, Integer> map = new HashMap<>();
+        int minValue = Integer.MAX_VALUE;
+
+        int count = 0;
+
+        Map<Character, Integer> tMap = new HashMap<>();
 
         for (char c : t.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+            tMap.put(c, tMap.getOrDefault(c, 0) + 1);
         }
 
-        for (right = 0; right < sLen; right++) {
-            if (map.containsKey(s.charAt(right))) {
-                map.put(s.charAt(right), map.get(s.charAt(right)) - 1);
-                if (map.get(s.charAt(right)) >= 0) {
+        for (right = 0; right < s.length(); right++) {
+            if (tMap.containsKey(s.charAt(right))) {
+                tMap.put(s.charAt(right), tMap.get(s.charAt(right)) - 1);
+                if (tMap.get(s.charAt(right)) >= 0) {
                     count--;
                 }
             }
@@ -31,17 +32,16 @@ public class MinimumWindowSubstring {
                     start = left;
                 }
 
-                if (map.containsKey(s.charAt(left))) {
-                    map.put(s.charAt(left), map.get(s.charAt(left)) + 1);
-                    if (map.get(s.charAt(left)) > 0) {
+                if (tMap.containsKey(s.charAt(left))) {
+                    tMap.put(s.charAt(left), tMap.get(s.charAt(left)) + 1);
+                    if (tMap.get(s.charAt(left)) > 0) {
                         count++;
                     }
                 }
                 left++;
             }
+
         }
-
-
         return minValue == Integer.MAX_VALUE ? "" : s.substring(start, start + minValue);
     }
 
