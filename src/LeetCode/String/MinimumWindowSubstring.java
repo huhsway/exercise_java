@@ -1,17 +1,13 @@
-package LeetCode.String;
-
 import java.util.*;
+
 public class MinimumWindowSubstring {
     public String minWindow(String s, String t) {
 
         int left = 0;
-        int right;
+        int right = 0;
         int start = 0;
-
         int minValue = Integer.MAX_VALUE;
-
         int count = 0;
-
         Map<Character, Integer> tMap = new HashMap<>();
 
         for (char c : t.toCharArray()) {
@@ -22,11 +18,11 @@ public class MinimumWindowSubstring {
             if (tMap.containsKey(s.charAt(right))) {
                 tMap.put(s.charAt(right), tMap.get(s.charAt(right)) - 1);
                 if (tMap.get(s.charAt(right)) >= 0) {
-                    count--;
+                    count++;
                 }
             }
 
-            while (count == 0) {
+            while (count == t.length()) {
                 if (right - left + 1 < minValue) {
                     minValue = right - left + 1;
                     start = left;
@@ -35,12 +31,11 @@ public class MinimumWindowSubstring {
                 if (tMap.containsKey(s.charAt(left))) {
                     tMap.put(s.charAt(left), tMap.get(s.charAt(left)) + 1);
                     if (tMap.get(s.charAt(left)) > 0) {
-                        count++;
+                        count--;
                     }
                 }
                 left++;
             }
-
         }
         return minValue == Integer.MAX_VALUE ? "" : s.substring(start, start + minValue);
     }
