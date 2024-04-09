@@ -4,13 +4,13 @@ import java.util.*;
 
 public class LongestRepeatingCharacterReplacement {
     public int characterReplacement(String s, int k) {
-        int n = s.length();
         Map<Character, Integer> count = new HashMap<>(); // 문자와 해당 문자의 개수를 저장할 맵
         int maxCount = 0; // 최대 반복 문자 개수
         int maxLength = 0; // 최대 부분 문자열 길이
         int left = 0; // 윈도우의 왼쪽 인덱스
-
-        for (int right = 0; right < n; right++) {
+        int right = 0;
+        
+        for (int right = 0; right < s.length(); right++) {
             char c = s.charAt(right);
             count.put(c, count.getOrDefault(c, 0) + 1); // 해당 문자의 개수 증가
             maxCount = Math.max(maxCount, count.get(c)); // 최대 반복 문자 개수 갱신
