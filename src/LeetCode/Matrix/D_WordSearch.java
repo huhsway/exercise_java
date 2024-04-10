@@ -1,6 +1,6 @@
 package LeetCode.Matrix;
 
-public class WordSearch {
+public class D_WordSearch {
     public boolean exist(char[][] board, String word) {
 
         for (int y = 0; y < board.length; y++) {

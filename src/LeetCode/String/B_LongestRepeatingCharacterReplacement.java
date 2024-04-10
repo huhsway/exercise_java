@@ -2,7 +2,7 @@ package LeetCode.String;
 
 import java.util.*;
 
-public class LongestRepeatingCharacterReplacement {
+public class B_LongestRepeatingCharacterReplacement {
     public int characterReplacement(String s, int k) {
         Map<Character, Integer> count = new HashMap<>();
         int maxLength = 0;
@@ -26,7 +26,7 @@ public class LongestRepeatingCharacterReplacement {
     }
 
     public static void main(String[] args) {
-        LongestRepeatingCharacterReplacement solution = new LongestRepeatingCharacterReplacement();
+        B_LongestRepeatingCharacterReplacement solution = new B_LongestRepeatingCharacterReplacement();
         String s = "AABABBA";
         int k = 2;
         int result = solution.characterReplacement(s, k);

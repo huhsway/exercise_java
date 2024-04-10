@@ -6,7 +6,7 @@ import java.util.List;
 
 
 // https://leetcode.com/problems/3sum/
-public class ThreeSum {
+public class I_3Sum {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> answer = new ArrayList<>();
         int n = nums.length;
@@ -50,7 +50,7 @@ public class ThreeSum {
     }
 
     public static void main(String[] args) {
-        ThreeSum solution = new ThreeSum();
+        I_3Sum solution = new I_3Sum();
         int[] nums = {-1, 0, 1, 2, -1, -4};
         List<List<Integer>> result = solution.threeSum(nums);
         for (List<Integer> temp : result) {

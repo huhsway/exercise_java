@@ -1,7 +1,7 @@
 package LeetCode.Array;
 
 //  https://leetcode.com/problems/maximum-subarray/
-public class MaximumSubarray {
+public class E_MaximumSubarray {
     public int maxSubArray(int[] nums) {
         int maxValue = nums[0];
         int result = nums[0];
@@ -15,7 +15,7 @@ public class MaximumSubarray {
     }
 
     public static void main(String[] args) {
-        MaximumSubarray solution = new MaximumSubarray();
+        E_MaximumSubarray solution = new E_MaximumSubarray();
         int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         int maxSum = solution.maxSubArray(nums);
         System.out.println(maxSum);

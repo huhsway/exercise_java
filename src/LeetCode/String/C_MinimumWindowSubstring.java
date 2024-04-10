@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MinimumWindowSubstring {
+public class C_MinimumWindowSubstring {
     public String minWindow(String s, String t) {
 
         int left = 0;
@@ -41,7 +41,7 @@ public class MinimumWindowSubstring {
     }
 
     public static void main(String[] args) {
-        MinimumWindowSubstring solution = new MinimumWindowSubstring();
+        C_MinimumWindowSubstring solution = new C_MinimumWindowSubstring();
         String s = "AAAAAABC";
         String t = "ABC";
         String minWindow = solution.minWindow(s, t);

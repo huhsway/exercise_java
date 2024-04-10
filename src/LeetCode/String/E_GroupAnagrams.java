@@ -3,7 +3,7 @@ package LeetCode.String;
 import java.util.*;
 
 // https://leetcode.com/problems/group-anagrams/
-public class GroupAnagrams {
+public class E_GroupAnagrams {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> hashMap = new HashMap<>();
 
@@ -20,7 +20,7 @@ public class GroupAnagrams {
     }
 
     public static void main(String[] args) {
-        GroupAnagrams solution = new GroupAnagrams();
+        E_GroupAnagrams solution = new E_GroupAnagrams();
         String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
         List<List<String>> result = solution.groupAnagrams(strs);
 

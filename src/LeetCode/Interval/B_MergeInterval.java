@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MergeInterval {
+public class B_MergeInterval {
     public int[][] merge(int[][] intervals) {
         if (intervals.length < 2) return intervals;
 
@@ -28,7 +28,7 @@ public class MergeInterval {
     }
 
     public static void main(String[] args) {
-        MergeInterval solution = new MergeInterval();
+        B_MergeInterval solution = new B_MergeInterval();
         int[][] intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
         int[][] result = solution.merge(intervals);
         for (int[] interval : result) {

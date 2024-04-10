@@ -3,7 +3,7 @@ package LeetCode.Array;
 
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
-public class BestTimeToBuyAndSellStock {
+public class B_BestTimeToBuyAndSellStock {
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length == 0) {
             return 0;
@@ -24,7 +24,7 @@ public class BestTimeToBuyAndSellStock {
     }
 
     public static void main(String[] args) {
-        BestTimeToBuyAndSellStock solution = new BestTimeToBuyAndSellStock();
+        B_BestTimeToBuyAndSellStock solution = new B_BestTimeToBuyAndSellStock();
         int[] prices = {7, 1, 5, 3, 6, 4};
         int maxProfit = solution.maxProfit(prices);
         System.out.println(maxProfit);

@@ -1,7 +1,7 @@
 package LeetCode.Array;
 
 // https://leetcode.com/problems/container-with-most-water/
-public class ContainerWithMostWater {
+public class J_ContainerWithMostWater {
     public int maxArea(int[] height) {
         int result = 0;
         int left = 0;
@@ -27,7 +27,7 @@ public class ContainerWithMostWater {
     }
 
     public static void main(String[] args) {
-        ContainerWithMostWater solution = new ContainerWithMostWater();
+        J_ContainerWithMostWater solution = new J_ContainerWithMostWater();
         int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
         int maxArea = solution.maxArea(height);
         System.out.println(maxArea);

@@ -1,6 +1,6 @@
 package LeetCode.Matrix;
 
-public class RotateImage {
+public class C_RotateImage {
 
     private static void rotate(int[][] matrix) {
         reverseMatrix(matrix);

@@ -1,6 +1,6 @@
 package LeetCode.String;
 
-public class PalindromicSubstrings {
+public class I_PalindromicSubstrings {
     public static int countSubstrings(String s) {
         int count = 0;
 

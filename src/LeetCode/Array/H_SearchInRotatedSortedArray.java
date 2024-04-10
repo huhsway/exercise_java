@@ -1,7 +1,7 @@
 package LeetCode.Array;
 
 // https://leetcode.com/problems/search-in-rotated-sorted-array/
-public class SearchInRotatedSortedArray {
+public class H_SearchInRotatedSortedArray {
     public int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
@@ -36,7 +36,7 @@ public class SearchInRotatedSortedArray {
 }
 
     public static void main(String[] args) {
-        SearchInRotatedSortedArray solution = new SearchInRotatedSortedArray();
+        H_SearchInRotatedSortedArray solution = new H_SearchInRotatedSortedArray();
         int[] nums = {4, 5, 6, 7, 0, 1, 2};
         int target = 0;
         int result = solution.search(nums, target);

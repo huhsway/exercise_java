@@ -1,6 +1,6 @@
 package LeetCode.String;
 
-public class ValidPalindrome {
+public class G_ValidPalindrome {
     public boolean isPalindrome(String s) {
         // Remove non-alphanumeric characters and convert to lowercase
         String cleanString = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
@@ -19,7 +19,7 @@ public class ValidPalindrome {
     }
 
     public static void main(String[] args) {
-        ValidPalindrome solution = new ValidPalindrome();
+        G_ValidPalindrome solution = new G_ValidPalindrome();
 
         // Test cases
         String s1 = "A man, a plan, a canal: Panama";

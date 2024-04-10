@@ -2,7 +2,7 @@ package LeetCode.String;
 
 import java.util.Arrays;
 
-public class LongestSubstringWithoutRepeatingCharacters {
+public class A_LongestSubstringWithoutRepeatingCharacters {
     public int lengthOfLongestSubstring(String s) {
         if (s == null || s.isEmpty()) {
             return 0;
@@ -26,7 +26,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
     }
 
     public static void main(String[] args) {
-        LongestSubstringWithoutRepeatingCharacters solution = new LongestSubstringWithoutRepeatingCharacters();
+        A_LongestSubstringWithoutRepeatingCharacters solution = new A_LongestSubstringWithoutRepeatingCharacters();
         String input = "abcabcbb";
         int length = solution.lengthOfLongestSubstring(input);
         System.out.println("Length of longest substring: " + length);

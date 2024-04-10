@@ -2,7 +2,7 @@ package LeetCode.Array;
 
 // https://leetcode.com/problems/product-of-array-except-self/
 
-public class ProductOfArrayExceptSelf {
+public class D_ProductOfArrayExceptSelf {
     public int[] productExceptSelf(int[] nums) {
         int length = nums.length;
         int[] result = new int[length];
@@ -25,7 +25,7 @@ public class ProductOfArrayExceptSelf {
     }
 
     public static void main(String[] args) {
-        ProductOfArrayExceptSelf solution = new ProductOfArrayExceptSelf();
+        D_ProductOfArrayExceptSelf solution = new D_ProductOfArrayExceptSelf();
         int[] nums = {1, 2, 3, 4};
         int[] result = solution.productExceptSelf(nums);
         for (int num : result) {

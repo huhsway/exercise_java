@@ -1,7 +1,7 @@
 package LeetCode.String;
 
 import java.util.*;
-public class ValidAnagram {
+public class D_ValidAnagram {
 
     public boolean isAnagram(String s, String t) {
         Map<Character, Integer> sMap = new HashMap<>();
@@ -21,7 +21,7 @@ public class ValidAnagram {
     }
 
     public static void main(String[] args) {
-        ValidAnagram solution = new ValidAnagram();
+        D_ValidAnagram solution = new D_ValidAnagram();
         String s = "anagram";
         String t = "nagaram";
         boolean result = solution.isAnagram(s, t);

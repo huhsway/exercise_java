@@ -1,7 +1,7 @@
 package LeetCode.String;
 
 // https://leetcode.com/problems/longest-palindromic-substring/
-public class LongestPalindromeSubstring {
+public class H_LongestPalindromeSubstring {
     public boolean isPalindrome(String s) {
         String rev = new StringBuilder(s).reverse().toString();
         return s.equals(rev);
@@ -41,7 +41,7 @@ public class LongestPalindromeSubstring {
     }
 
     public static void main(String[] args) {
-        LongestPalindromeSubstring solution = new LongestPalindromeSubstring();
+        H_LongestPalindromeSubstring solution = new H_LongestPalindromeSubstring();
         String s = "babad";
         String result = solution.longestPalindrome(s);
         System.out.println("Longest palindrome substring is: " + result);

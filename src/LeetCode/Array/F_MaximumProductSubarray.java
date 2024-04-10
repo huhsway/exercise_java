@@ -1,7 +1,7 @@
 package LeetCode.Array;
 
 //  https://leetcode.com/problems/maximum-product-subarray/
-public class MaximumProductSubarray {
+public class F_MaximumProductSubarray {
     public int maxProduct(int[] nums) {
         int result = Integer.MIN_VALUE;
         int maxValue = 1;
@@ -19,7 +19,7 @@ public class MaximumProductSubarray {
     }
 
     public static void main(String[] args) {
-        MaximumProductSubarray solution = new MaximumProductSubarray();
+        F_MaximumProductSubarray solution = new F_MaximumProductSubarray();
         int[] nums = {2, 3, -2, 4};
         int maxProd = solution.maxProduct(nums);
         System.out.println(maxProd);

@@ -3,7 +3,7 @@ package LeetCode.Interval;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsertInterval {
+public class A_InsertInterval {
     public int[][] insert(int[][] intervals, int[] newInterval) {
         List<int[]> output = new ArrayList<>();
         int i = 0;
@@ -38,7 +38,7 @@ public class InsertInterval {
     }
 
     public static void main(String[] args) {
-        InsertInterval solution = new InsertInterval();
+        A_InsertInterval solution = new A_InsertInterval();
         int[][] intervals = {{1, 3}, {6, 9}};
         int[] newInterval = {2, 5};
         int[][] result = solution.insert(intervals, newInterval);

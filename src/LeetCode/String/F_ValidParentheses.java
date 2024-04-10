@@ -2,7 +2,7 @@ package LeetCode.String;
 
 import java.util.*;
 
-public class ValidParentheses {
+public class F_ValidParentheses {
     public boolean isValid(String s) {
         // Optional: Check if the length of the string is even
         // if (s.length() % 2 != 0) return false;
