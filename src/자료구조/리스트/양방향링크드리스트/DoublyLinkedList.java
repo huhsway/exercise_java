@@ -64,17 +64,6 @@ public class DoublyLinkedList<T> { // T는 제네릭 타입 파라미터
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Node<T> currNode = this.head.next;
-        while (currNode != null) {
-            sb.append(currNode.value).append(" ");
-            currNode = currNode.next;
-        }
-        return sb.toString().trim();
-    }
-
     public static void main(String[] args) {
         try {
             DoublyLinkedList<String> linkedList = new DoublyLinkedList<>(); // 사용 예시: 문자열 타입의 리스트
