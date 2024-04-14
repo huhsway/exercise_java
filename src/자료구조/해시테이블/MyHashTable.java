@@ -103,10 +103,6 @@ public class MyHashTable<K, V> {
         return findByHash(key) != -1;
     }
 
-    public int size() {
-        return size;
-    }
-
     public static void main(String[] args) {
         MyHashTable<String, Integer> myHashTable = new MyHashTable<>();
 
@@ -114,11 +110,9 @@ public class MyHashTable<K, V> {
         myHashTable.put("two", 2);
         myHashTable.put("three", 3);
 
-        System.out.println("Size: " + myHashTable.size()); // 3
         System.out.println("Value for 'two': " + myHashTable.get("two")); // 2
 
         myHashTable.remove("one");
-        System.out.println("Size (after removing 'one'): " + myHashTable.size()); // 2
         System.out.println("Contains key 'one'? " + myHashTable.containsKey("one")); // false
     }
 

@@ -17,7 +17,7 @@ public class MyQueue<T> {
     }
 
     public void enqueue(T item) {
-        if (isFull()) {
+        if (size == capacity) {
             increaseCapacity();
         }
         rear = (rear + 1) % capacity;
@@ -26,7 +26,7 @@ public class MyQueue<T> {
     }
 
     public T dequeue() {
-        if (isEmpty()) {
+        if (size == 0) {
             throw new IllegalStateException("큐가 비어 있습니다.");
         }
         T item = (T) elements[front];
@@ -37,22 +37,10 @@ public class MyQueue<T> {
     }
 
     public T peek() {
-        if (isEmpty()) {
+        if (size == 0) {
             throw new IllegalStateException("큐가 비어 있습니다.");
         }
         return (T) elements[front];
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public boolean isFull() {
-        return size == capacity;
     }
 
     private void increaseCapacity() {
@@ -74,11 +62,9 @@ public class MyQueue<T> {
         myQueue.enqueue(2);
         myQueue.enqueue(3);
 
-        System.out.println("큐 크기: " + myQueue.size()); // 3
         System.out.println("가장 앞 요소: " + myQueue.peek()); // 1
 
         int dequeuedItem = myQueue.dequeue();
         System.out.println("디큐한 요소: " + dequeuedItem); // 1
-        System.out.println("큐 크기 (디큐 후): " + myQueue.size()); // 2
     }
 }

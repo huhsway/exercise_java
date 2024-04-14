@@ -1,44 +1,5 @@
 package 자료구조.우선순위큐;
 
-//public class Main {
-//    public static void main(String[] args) {
-//        // MyClass 인스턴스를 저장하는 최대힙 PriorityQueue 생성
-//        PriorityQueue<MyClass> maxHeap = new PriorityQueue<>();
-//
-//        // PriorityQueue에 MyClass 인스턴스 추가
-//        maxHeap.push(new MyClass(10));
-//        maxHeap.push(new MyClass(5));
-//        maxHeap.push(new MyClass(20));
-//        maxHeap.push(new MyClass(1));
-//
-//        System.out.println("PriorityQueue에서 요소를 제거하며 출력:");
-//        while (maxHeap.peek() != null) {
-//            MyClass removed = maxHeap.pop();
-//            System.out.println(removed.getValue());
-//        }
-//    }
-//}
-
-// // 사용자 정의 클래스 MyClass
-//class MyClass implements Comparable<MyClass> {
-//    private int value; // 비교를 위한 값
-//
-//    public MyClass(int value) {
-//        this.value = value;
-//    }
-//
-//    public int getValue() {
-//        return this.value;
-//    }
-//
-//    // MyClass 객체들을 비교하기 위한 compareTo 메소드
-//    @Override
-//    public int compareTo(MyClass other) {
-//        // 최대힙을 위해 비교 방식을 반대로 함
-//        return other.value - this.value;
-//    }
-//}
-
 public class PriorityQueue<T extends Comparable<T>> {
     private Object[] heap;
     private int size;

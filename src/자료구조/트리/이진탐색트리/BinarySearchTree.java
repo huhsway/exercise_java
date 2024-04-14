@@ -90,6 +90,8 @@ public class BinarySearchTree {
         System.out.println(rootNode.getLeft().getRight().getValue()); // 8
         System.out.println(rootNode.getRight().getLeft().getValue()); // 11
 
+        System.out.println(rootNode.contains(8));
+
         System.out.print("Preorder traversal: ");
         rootNode.preorder();
         System.out.println();

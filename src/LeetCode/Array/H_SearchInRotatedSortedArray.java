@@ -33,7 +33,7 @@ public class H_SearchInRotatedSortedArray {
 
         return -1;
     }
-}
+
 
     public static void main(String[] args) {
         H_SearchInRotatedSortedArray solution = new H_SearchInRotatedSortedArray();
