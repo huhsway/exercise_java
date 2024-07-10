@@ -3,6 +3,7 @@ package LeetCode.Interval;
 import java.util.ArrayList;
 import java.util.List;
 
+// https://leetcode.com/problems/insert-interval/ 
 public class A_InsertInterval {
     public int[][] insert(int[][] intervals, int[] newInterval) {
 
