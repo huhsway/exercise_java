@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// https://leetcode.com/problems/merge-intervals/
 public class B_MergeInterval {
     public int[][] merge(int[][] intervals) {
         if (intervals.length < 2) return intervals;

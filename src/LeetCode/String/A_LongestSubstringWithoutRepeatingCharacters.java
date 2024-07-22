@@ -2,6 +2,7 @@ package LeetCode.String;
 
 import java.util.Arrays;
 
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/ 
 public class A_LongestSubstringWithoutRepeatingCharacters {
     public int lengthOfLongestSubstring(String s) {
         if (s == null || s.isEmpty()) {

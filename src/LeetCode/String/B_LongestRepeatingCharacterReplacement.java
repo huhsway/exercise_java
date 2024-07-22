@@ -2,6 +2,7 @@ package LeetCode.String;
 
 import java.util.*;
 
+// https://leetcode.com/problems/longest-repeating-character-replacement/ 
 public class B_LongestRepeatingCharacterReplacement {
     public int characterReplacement(String s, int k) {
         Map<Character, Integer> count = new HashMap<>();

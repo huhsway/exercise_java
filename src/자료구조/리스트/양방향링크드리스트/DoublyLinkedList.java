@@ -22,7 +22,7 @@ public class DoublyLinkedList<T> { // T는 제네릭 타입 파라미터
         this.tail = this.head;
     }
 
-    public void append(T value) { // 매개변수 타입을 T로 변경
+    private void append(T value) { // 매개변수 타입을 T로 변경
         Node<T> newNode = new Node<T>(value);
         newNode.prev = this.tail;
         this.tail.next = newNode;
@@ -31,16 +31,18 @@ public class DoublyLinkedList<T> { // T는 제네릭 타입 파라미터
 
     private Node<T> find(T item) { // 매개변수와 비교 대상의 타입을 T로 변경
         Node<T> currNode = this.head;
-        while (currNode != null && !currNode.value.equals(item)) {
+        while (currNode != null) {
+            if (currNode.value == null && item == null) { // 두 값이 모두 null일 때
+                return currNode;
+            } else if (currNode.value != null && currNode.value.equals(item)) { // 값이 null이 아닐 때
+                return currNode;
+            }
             currNode = currNode.next;
         }
-        if (currNode == null) {
-            throw new IllegalArgumentException("Item not found: " + item);
-        }
-        return currNode;
+        throw new IllegalArgumentException("Item not found: " + item);
     }
 
-    public void insert(T value, T item) { // 매개변수 타입을 T로 변경
+    private void insert(T value, T item) { // 매개변수 타입을 T로 변경
         Node<T> currNode = this.find(item);
         Node<T> newNode = new Node<T>(value);
         newNode.next = currNode.next;
@@ -51,7 +53,7 @@ public class DoublyLinkedList<T> { // T는 제네릭 타입 파라미터
         currNode.next = newNode;
     }
 
-    public void remove(T item) { // 매개변수 타입을 T로 변경
+    private void remove(T item) { // 매개변수 타입을 T로 변경
         Node<T> targetNode = this.find(item);
         if (targetNode == this.tail) {
             this.tail = targetNode.prev;
@@ -64,10 +66,24 @@ public class DoublyLinkedList<T> { // T는 제네릭 타입 파라미터
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Node<T> currNode = this.head.next; // head는 dummy node이므로 다음 노드부터 시작
+        while (currNode != null) {
+            sb.append(currNode.value);
+            if (currNode.next != null) {
+                sb.append(" -> ");
+            }
+            currNode = currNode.next;
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         try {
             DoublyLinkedList<String> linkedList = new DoublyLinkedList<>(); // 사용 예시: 문자열 타입의 리스트
-            linkedList.insert("A", "head");
+            linkedList.insert("A", null); // head의 value가 null이므로 null을 넣어야 함
             linkedList.insert("B", "A");
             linkedList.insert("C", "B");
             linkedList.remove("B");
