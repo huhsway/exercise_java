@@ -39,16 +39,26 @@ public class DoublyLinkedList<T> {
     }
 
     public void insert(T value, T item) {
-        Node<T> currNode = find(item);
         Node<T> newNode = new Node<>(value);
-        newNode.next = currNode.next;
-        newNode.prev = currNode;
-        if (currNode.next != null) {
-            currNode.next.prev = newNode;
+        if (item == null) {
+            if (head == null) {
+                head = tail = newNode;
+            } else {
+                newNode.next = head;
+                head.prev = newNode;
+                head = newNode;
+            }
         } else {
-            tail = newNode;
+            Node<T> currNode = find(item);
+            newNode.next = currNode.next;
+            newNode.prev = currNode;
+            if (currNode.next != null) {
+                currNode.next.prev = newNode;
+            } else {
+                tail = newNode;
+            }
+            currNode.next = newNode;
         }
-        currNode.next = newNode;
     }
 
     public void remove(T item) {
@@ -86,6 +96,7 @@ public class DoublyLinkedList<T> {
             linkedList.remove("B");
             linkedList.append("D");
             linkedList.append("E");
+            linkedList.insert("B", null);
 
             System.out.println(linkedList);
         } catch (Exception e) {
