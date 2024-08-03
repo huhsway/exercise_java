@@ -13,7 +13,7 @@ public class Main {
             if (arr[mid] >= target) right = mid;
             else left = mid + 1;
         }
-        return right;
+        return left;
     }
 
     public static int upperBound(int[] arr, int target, int left, int right) {
@@ -22,7 +22,7 @@ public class Main {
             if (arr[mid] > target) right = mid;
             else left = mid + 1;
         }
-        return right;
+        return left;
     }
 
     // 값이 [left_value, right_value]인 데이터의 개수를 반환하는 함수
@@ -54,7 +54,6 @@ public class Main {
 
         // 값이 x인 원소가 존재하지 않는다면
         if (cnt == 0) System.out.println(-1);
-            //  값이 x인 원소가 존재한다면
         else System.out.println(cnt);
     }
 }
