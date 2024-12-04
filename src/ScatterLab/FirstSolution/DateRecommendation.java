@@ -53,7 +53,7 @@ public class DateRecommendation {
                 worstDay = i;
             }
         }
-        return worstDay == -1 ? -1 : worstDay;
+        return worstDay;
     }
 
     private static int[] calculateScores(int[][] week) {
