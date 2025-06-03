@@ -1,5 +1,6 @@
 package LeetCode.Matrix;
 
+// https://leetcode.com/problems/word-search/
 public class D_WordSearch {
     public boolean exist(char[][] board, String word) {
 
