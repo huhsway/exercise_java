@@ -25,11 +25,11 @@ public class RotateArray {
 //    // 배열 하나 더쓰고 for문 1번으로
 //    public int[] rotateArray(int[] arr, int t) {
 //        int n = arr.length;
-//        t = t % n; // 배열 길이보다 큰 t에 대응하기 위해 t를 배열 길이로 나눈 나머지를 사용합니다.
+//        int temp = t % n; // 배열 길이보다 큰 t에 대응하기 위해 t를 배열 길이로 나눈 나머지를 사용합니다.
 //
 //        int[] rotatedArr = new int[n];
 //        for (int i = 0; i < n; i++) {
-//            rotatedArr[(i + t) % n] = arr[i];
+//            rotatedArr[(i + temp) % n] = arr[i];
 //        }
 //
 //        return rotatedArr;

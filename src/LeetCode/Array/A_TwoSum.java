@@ -9,9 +9,8 @@ public class A_TwoSum {
         Map<Integer, Integer> vals = new HashMap<>();
 
         for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
-            if (vals.containsKey(complement)) {
-                return new int[]{vals.get(complement), i};
+            if (vals.containsKey(target - nums[i])) {
+                return new int[]{vals.get(target - nums[i]), i};
             } else {
                 vals.put(nums[i], i);
             }

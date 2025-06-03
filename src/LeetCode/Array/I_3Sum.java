@@ -25,9 +25,10 @@ public class I_3Sum {
                 int total = nums[standard] + nums[left] + nums[right];
                 if (total == 0) {
                     List<Integer> temp = new ArrayList<>();
-                    temp.add(nums[standard]);
-                    temp.add(nums[left]);
-                    temp.add(nums[right]);
+                    // temp.add(nums[standard]);
+                    // temp.add(nums[left]);
+                    // temp.add(nums[right]);
+                    temp.addAll(Arrays.asList(nums[standard], nums[left], nums[right]));
                     answer.add(temp);
 
                     while (left < right && nums[left] == nums[left + 1]) {
