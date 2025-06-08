@@ -44,7 +44,7 @@ public class Solution {
             int play = plays[i];
 
             genreTotalPlays.put(genre, genreTotalPlays.getOrDefault(genre, 0) + play);
-            genreSongs.computeIfAbsent(genre, k -> new PriorityQueue<>())
+            genreSongs.computeIfAbsent(genre, key -> new PriorityQueue<>())
                     .add(new Song(genre, play, i));
         }
 
