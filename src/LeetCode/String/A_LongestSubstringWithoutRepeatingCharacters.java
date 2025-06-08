@@ -32,4 +32,26 @@ public class A_LongestSubstringWithoutRepeatingCharacters {
         int length = solution.lengthOfLongestSubstring(input);
         System.out.println("Length of longest substring: " + length);
     }
+
+    /*
+    public int lengthOfLongestSubstring(String s){
+
+        if (s == null || s.isEmpty()) return 0;
+
+        String check = "";
+        int result = 0;
+
+        for (char c : s.toCharArray()) {
+            if (check.contains(String.valueOf(c))) {
+                check = check.substring(check.indexOf(c) + 1);
+            }
+
+            check += c;
+            result = Math.max(result, check.length());
+        }
+
+        return result;
+
+    }     
+    */
 }
