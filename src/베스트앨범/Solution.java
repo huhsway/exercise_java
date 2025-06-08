@@ -11,6 +11,19 @@ import java.util.*;
  */
 
 public class Solution {
+
+    /*
+     add(E e)	요소를 큐에 추가. 큐의 크기가 초과되면 IllegalStateException 발생 가능 (잘 안 씀)
+     offer(E e)	요소를 큐에 추가. 큐가 꽉 차도 false 반환 (에러 안 나고 더 안전함)
+     peek()	가장 우선순위 높은 요소를 조회만 함 (삭제 안 함)
+     poll()	가장 우선순위 높은 요소를 제거하고 반환 (없으면 null 반환)
+     remove()	큐의 맨 앞 요소 제거 (없으면 NoSuchElementException)
+     remove(Object o)	해당 객체를 큐에서 제거 (중간 요소 제거 시 사용)
+     isEmpty()	큐가 비었는지 확인
+     size()	현재 큐에 들어있는 요소 수
+     clear()	큐 비우기
+     contains(Object o)	특정 요소가 큐에 있는지 확인
+     */
     
     public static class Song implements Comparable<Song> {
 
@@ -45,7 +58,7 @@ public class Solution {
 
             genreTotalPlays.put(genre, genreTotalPlays.getOrDefault(genre, 0) + play);
             genreSongs.computeIfAbsent(genre, key -> new PriorityQueue<>())
-                    .add(new Song(genre, play, i));
+                    .offer(new Song(genre, play, i));
         }
 
         List<String> genreList = new ArrayList<>(genreTotalPlays.keySet());
