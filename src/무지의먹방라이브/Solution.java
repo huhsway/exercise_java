@@ -47,6 +47,8 @@ class Solution {
             previousFoodTime = currentFoodTime;
         }
 
+        if (foodRemaining == 0) return -1;
+
         List<Food> remainingFoods = new ArrayList<>(pq);
         remainingFoods.sort(Comparator.comparing(Food::getIndex));
 
