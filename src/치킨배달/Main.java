@@ -27,18 +27,16 @@ class Node {
 
 public class Main {
 
-    private static int n, m;
-    private static int[][] city;
-    private static List<Node> house = new ArrayList<>();
-    private static List<Node> chicken = new ArrayList<>();
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-        city = new int[n][n];
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        int[][] city = new int[n][n];
+
+        List<Node> house = new ArrayList<>();
+        List<Node> chicken = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
