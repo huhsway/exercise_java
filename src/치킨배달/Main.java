@@ -78,19 +78,19 @@ public class Main {
         List<List<Node>> result = new ArrayList<>();
         List<Node> temp = new ArrayList<>();
 
-        dfs(n, m, arr, 0, 0, temp, result);
+        dfs(n, m, arr, temp, result, 0, 0);
 
         return result;
     }
 
-    private static void dfs(int n, int m, List<Node> arr, int depth, int start, List<Node> temp, List<List<Node>> result) {
+    private static void dfs(int n, int m, List<Node> arr, List<Node> temp, List<List<Node>> result, int depth, int start) {
         if (depth == m) {
 //            result.add(temp); // 얕은 복사 temp 리스트의 참조가 그대로 리스트에 추가되서 temp가 변경될 때마다 result 리스트의 항목도 변경됨
             result.add(new ArrayList<>(temp)); // 깊은 복사 temp 리스트의 요소들을 새로운 ArrayList 객체에 복사헤서 temp와 result가 독립적으로 유지
         } else {
             for (int i = start; i < n; i++) {
                 temp.add(arr.get(i));
-                dfs(n, m, arr, depth + 1, i + 1, temp, result);
+                dfs(n, m, arr, temp, result, depth + 1, i + 1);
                 temp.remove(temp.size() - 1); // backtrack
             }
         }
