@@ -17,11 +17,11 @@ class Node {
     }
 
     public int getY() {
-        return y;
+        return this.y;
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 }
 
