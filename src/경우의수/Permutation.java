@@ -23,22 +23,21 @@ class Permutation {
         return answer;
     }
 
-    private static void dfs(int n, int m, int[] arr, boolean[] visited, List<Integer> temp, List<List<Integer>> answer, int depth) {
-        if (depth == m) {
+    private static void dfs(int n, int r, int[] arr, boolean[] visited, List<Integer> temp, List<List<Integer>> answer, int depth) {
+        if (depth == r) {
             answer.add(new ArrayList<>(temp));
         } else {
             for (int i = 0; i < n; i++) {
                 if (!visited[i]) {
                     visited[i] = true; // mark as visited
                     temp.add(arr[i]);
-                    dfs(n, m, arr, visited, temp, answer, depth + 1);
+                    dfs(n, r, arr, visited, temp, answer, depth + 1);
                     temp.remove(temp.size() - 1); // backtrack
                     visited[i] = false; // reset the visited status
                 }
             }
         }
     }
-
 
 //    public static void permutation(int n, int r, int depth, int[] perArr, boolean[] perCheck, int[] arr, List<List<Integer>> result) {
 //        if (depth == r) {
