@@ -1,7 +1,4 @@
 import java.util.*;
-
-import 자료구조.우선순위큐.PriorityQueue;
-
 public class Test {
 
     public static class Song implements Comparable<Song> {
@@ -31,17 +28,37 @@ public class Test {
 
     public int[] solution(String[] genres, int[] plays) {
 
-        Map<String, Integer> genreTotalPlay = new HashMap<>();
+        Map<String, Integer> genreTotalPlays = new HashMap<>();
         Map<String, PriorityQueue<Song>> genreSongs = new HashMap<>();
 
         for (int i = 0; i < genres.length; i++) {
             String genre = genres[i];
             int play = plays[i];
 
-            genreTotalPlay.put(genre, genreTotalPlay.getOrDefault(genre, 0) + play);
+            genreTotalPlays.put(genre, genreTotalPlays.getOrDefault(genre, 0) + play);
             genreSongs.computeIfAbsent(genre, key -> new PriorityQueue<>())
-                .add(new Song(genre, play, i));
+                    .offer(new Song(genre, play, i));
         }
+        // genreList.sort((a,b) -> genreTotalPlays.get(b) - genreTotalPlays.get(a));
+
+        List<String> genreList = genreTotalPlays.entrySet().stream()
+                .sorted((a, b) -> b.getValue() - a.getValue())
+                .map(Map.Entry::getKey)
+                .toList();
+
+        List<Integer> answerList = new ArrayList<>();
+
+        for (String genre : genreList) {
+            PriorityQueue<Song> songs = genreSongs.get(genre);
+            int count = 0;
+
+            while (!songs.isEmpty() && count < 2) {
+                answerList.add(songs.poll().getIndex());
+                count++;
+            }
+        }
+
+        return answerList.stream().mapToInt(Integer::intValue).toArray();
 
     }
 
