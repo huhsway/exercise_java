@@ -5,13 +5,6 @@ import java.util.*;
 
 // https://yganalyst.github.io/training/algo_tr_ect_1/
 
-package dfs;
-
-import java.io.*;
-import java.util.*;
-
-// https://yganalyst.github.io/training/algo_tr_ect_1/
-
 public class DfsApplication {
     private int n, m;
 
