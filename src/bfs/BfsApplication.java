@@ -15,18 +15,16 @@ class Position {
 
 public class BfsApplication {
 
-    private int[][] graph;
     private int n, m;
     private final int[] dy = {-1, 1, 0, 0};
     private final int[] dx = {0, 0, -1, 1};
 
-    public BfsApplication(int n, int m, int[][] graph) {
+    public BfsApplication(int n, int m) {
         this.n = n;
         this.m = m;
-        this.graph = graph;
     }
 
-    public int bfs(int y, int x) {
+    public int bfs(int y, int x, int[][] graph) {
         Queue<Position> queue = new LinkedList<>();
         queue.offer(new Position(y, x));
 
@@ -39,9 +37,7 @@ public class BfsApplication {
                 int ny = y + dy[i];
                 int nx = x + dx[i];
 
-                if (ny < 0 || ny >= n || nx < 0 || nx >= m || graph[ny][nx] == 0) {
-                    continue;
-                }
+                if (ny < 0 || ny >= n || nx < 0 || nx >= m || graph[ny][nx] == 0) continue;
 
                 if (graph[ny][nx] == 1) {
                     graph[ny][nx] = graph[y][x] + 1;
@@ -55,10 +51,11 @@ public class BfsApplication {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-
         int[][] graph = new int[n][m];
+
         for (int i = 0; i < n; i++) {
             String line = br.readLine();
             for (int j = 0; j < m; j++) {
@@ -66,7 +63,7 @@ public class BfsApplication {
             }
         }
 
-        BfsApplication app = new BfsApplication(n, m, graph);
-        System.out.println(app.bfs(0, 0));
+        BfsApplication app = new BfsApplication(n, m);
+        System.out.println(app.bfs(0, 0, graph));
     }
 }
