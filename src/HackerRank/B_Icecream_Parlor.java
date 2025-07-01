@@ -12,7 +12,7 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class Result {
+class B_Icecream_Parlor {
 
     /*
      * Complete the 'icecreamParlor' function below.
