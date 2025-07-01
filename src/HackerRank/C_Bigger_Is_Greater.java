@@ -27,7 +27,7 @@ class Result {
             return "no answer";
         }
 
-        // 2. 피벗(i) 뒤에서 피벗보다 큰 첫 번째 문자 찾기
+        // 2. 제일 뒤부터 시작해서 피벗보다 큰 첫 번째 문자 찾기
         int j = -1; // 교환할 문자 인덱스 초기화
         for (int k = n - 1; k > i; k--) {
             if (charArray[k] > charArray[i]) {
