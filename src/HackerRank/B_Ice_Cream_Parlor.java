@@ -22,22 +22,21 @@ class Result {
      */
 
     public static List<Integer> icecreamParlor(int m, List<Integer> arr) {
-        // Write your code here
+    // Write your code here
         HashMap<Integer, Integer> hashMap = new HashMap<>();
-
+        
         List<Integer> result = new ArrayList<>();
-
+        
         for (int i = 0; i < arr.size(); i++) {
             if (hashMap.containsKey(m - arr.get(i))) {
-                result.add(i+1);
-                result.add(hashMap.get(m - arr.get(i)));
+                result = Arrays.asList(i+1, hashMap.get(m - arr.get(i)));
                 Collections.sort(result);
                 return result;
             } else {
                 hashMap.put(arr.get(i), i+1);
             }
         }
-
+        
         return null;
 
     }
@@ -58,16 +57,16 @@ public class Solution {
                 int n = Integer.parseInt(bufferedReader.readLine().trim());
 
                 List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-                        .map(Integer::parseInt)
-                        .collect(toList());
+                    .map(Integer::parseInt)
+                    .collect(toList());
 
                 List<Integer> result = Result.icecreamParlor(m, arr);
 
                 bufferedWriter.write(
-                        result.stream()
-                                .map(Object::toString)
-                                .collect(joining(" "))
-                                + "\n"
+                    result.stream()
+                        .map(Object::toString)
+                        .collect(joining(" "))
+                    + "\n"
                 );
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
